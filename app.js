@@ -55,12 +55,9 @@ const resetarCronometro = () => {
     clearInterval(cronometroId);
     minutos = 25;
     segundos = 0;
-    //valores sanatizados
-    let minutosFormatados = minutos.toString().padStart(2, "0"); 
-    let segundosFormatados = segundos.toString().padStart(2, "0");
+    atualizarDisplay()
     cronometroId = null;
     //renderizar o diplay resetado
-    display.textContent = `${minutosFormatados}:${segundosFormatados}`;
     botao.textContent = "Iniciar Ciclo ▶️";
     botaoReset.hidden = true;
 
