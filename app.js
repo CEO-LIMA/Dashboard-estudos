@@ -3,8 +3,8 @@ const botaoReset = document.querySelector("#btnResetar")
 const display = document.querySelector("#tempoDisplay");
 
 // Variáveis do cronômetro
-let minutos = 25;
-let segundos = 0;
+let minutos = 0;
+let segundos = 3;
 let cronometroId = null; 
 
 // função de renderizar
@@ -28,6 +28,7 @@ const iniciarCronometro = () => {
     cronometroId = setInterval(() => {
     // verifica se minutos e segundos são 0 
     if(segundos === 0 && minutos === 0){
+        emitirBeep()
         resetarCronometro();
         return;
     }
@@ -62,6 +63,30 @@ const resetarCronometro = () => {
 
 }
 
+// função para emitir o som de aviso (Buzzer)
+const emitirBeep = () => {
+    // 1. Cria o contexto de áudio do navegador
+    const contexto = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // 2. Cria o oscilador (gerador de onda senoidal)
+    const oscilador = contexto.createOscillator();
+    
+    // 3. Conecta o oscilador à saída de som do sistema
+    oscilador.connect(contexto.destination);
+    
+    // 4. Configura as propriedades do som
+    oscilador.type = "sine";          
+    oscilador.frequency.value = 600;  
+    
+    // 5. Liga o som
+    oscilador.start();
+    
+    // 6. Agenda o desligamento automático após 0.2 segundos
+    setTimeout(() => {
+        oscilador.stop();
+        contexto.close();
+    }, 200);
+}
 
 // Evento de partida
 botao.addEventListener("click", () => {
