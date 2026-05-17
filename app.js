@@ -2,13 +2,15 @@ const botao = document.getElementById("btnIniciar");
 const botaoReset = document.getElementById("btnResetar")
 const display = document.getElementById("tempoDisplay");
 const timerStatus = document.getElementById("timerStatus")
+const contadorPainel = document.getElementById("contadorPainel");
 
 // Variáveis do cronômetro
-let minutos = 25;
-let segundos = 0;
+let minutos = 0;
+let segundos = 5;
 let cronometroId = null; 
 let modoAtual = "foco"; 
 let ciclosConcluidos = 0;
+let totalCiclosDoDia = 0;
 
 // função de renderizar
 const atualizarDisplay = () => {
@@ -76,6 +78,9 @@ const gerenciarFimDeCiclo = () => {
 
     if(modoAtual === "foco"){
         ciclosConcluidos++; // adiciona +1 ao contador
+        totalCiclosDoDia++; // adiciona +1 ao Ciclos totais do Dia
+        
+        contadorPainel.textContent = totalCiclosDoDia;
 
         if(ciclosConcluidos === 1){
             // Primeiro Ciclo acabou -> Descanso de 5 min
