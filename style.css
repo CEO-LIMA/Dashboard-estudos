@@ -104,3 +104,9 @@ button {
     color: var(--texto-principal);
     transition: color 0.4s ease;
 }
+
+.estatisticas {
+    text-align: center;
+    color: var(--texto-suave);
+    margin-top: 20px;
+}
