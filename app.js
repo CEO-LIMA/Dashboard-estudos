@@ -3,6 +3,7 @@ const botaoReset = document.getElementById("btnResetar")
 const display = document.getElementById("tempoDisplay");
 const timerStatus = document.getElementById("timerStatus")
 const contadorPainel = document.getElementById("contadorPainel");
+const timerPrevisao = document.getElementById("timerPrevisao")
 
 // Variáveis do cronômetro
 let minutos = 0;
@@ -23,13 +24,29 @@ const atualizarDisplay = () => {
     display.textContent = `${minutosFormatados}:${segundosFormatados}`;
 }
 
+const atualizarStatusTexto = () => {
+    if(modoAtual === "foco"){
+        if(ciclosConcluidos === 0){
+            timerStatus.textContent = "Período de foco (1 de 2)";
+            timerPrevisao.innerHTML = "A seguir: <strong>5 min de intervalo</strong>";
+        }else if(ciclosConcluidos === 1){
+            timerStatus.textContent = "Período de foco (2 de 2)";
+            timerPrevisao.innerHTML = "A seguir: <strong>25 min de foco (Ciclo 1 de 2)</strong>"
+        }
+    }
+    else if(modoAtual === "descanso"){
+        timerStatus.textContent = "Intervalo ☕"
+        timerPrevisao.innerHTML = "A seguir: <strong>25 min de foco</strong>"
+    }
+}
+
 // função cronômetro
 const iniciarCronometro = () => {
 
     // verifica se o cronômetro já foi iniciado
     if(cronometroId !== null) return;
 
-    timerStatus.textContent = modoAtual === "foco" ? "Foco 🔥" : "Descanso ☕"
+    atualizarStatusTexto();
     
     // API assíncrona (temporizador do browser)
     cronometroId = setInterval(() => {
@@ -55,7 +72,7 @@ const iniciarCronometro = () => {
 const pausarCronometro = () => {
     clearInterval(cronometroId);
     cronometroId = null;
-    timerStatus.textContent = "Pausado ⏯️"
+    timerPrevisao.textContent = "Em Pausa"
 }
 
 // função de Resetar
@@ -63,12 +80,14 @@ const resetarCronometro = () => {
     clearInterval(cronometroId);
     minutos = 25;
     segundos = 0;
+    modoAtual = "foco"
+    ciclosConcluidos = 0;
     atualizarDisplay()
+    atualizarStatusTexto()
     cronometroId = null;
     //renderizar o diplay resetado
     botao.textContent = "Iniciar Ciclo ▶️";
     botaoReset.hidden = true;
-    timerStatus.textContent = "Pomodoro Pronto 🎯"
 
 }
 
@@ -87,7 +106,6 @@ const gerenciarFimDeCiclo = () => {
             modoAtual = "descanso";
             minutos = 5;
             segundos = 0;
-            timerStatus.textContent = "Descanso ☕"
         }
         else if(ciclosConcluidos === 2){
             // Segundo ciclo acabou
@@ -97,7 +115,6 @@ const gerenciarFimDeCiclo = () => {
             modoAtual = "foco"
             minutos = 25;
             segundos = 0;
-            timerStatus.textContent = "Pomodoro Pronto 🎯"
         }
     }
     else if(modoAtual === "descanso"){
@@ -105,9 +122,9 @@ const gerenciarFimDeCiclo = () => {
         modoAtual = "foco"
         minutos = 25;
         segundos = 0;
-        timerStatus.textContent = "Foco 🔥"
     }
     atualizarDisplay(); // Atualiza os números da tela 
+    atualizarStatusTexto();
 }
 
 // função para emitir o som de aviso (Buzzer)

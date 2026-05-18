@@ -110,3 +110,13 @@ button {
     color: var(--texto-suave);
     margin-top: 20px;
 }
+#timerPrevisao {
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+#timerPrevisao strong {
+    color: var(--texto-principal);
+    font-weight: 600;
+}
