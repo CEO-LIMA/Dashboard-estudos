@@ -7,8 +7,8 @@ const timerPrevisao = document.getElementById("timerPrevisao");
 const secaoEstatisticas = document.querySelector(".estatisticas");
 
 // Variáveis do cronômetro
-let minutos = 0;
-let segundos = 5;
+let minutos = 25;
+let segundos = 0;
 let cronometroId = null; 
 let modoAtual = "foco"; 
 let ciclosConcluidos = 0;
@@ -108,8 +108,8 @@ const gerenciarFimDeCiclo = () => {
         if(ciclosConcluidos === 1){
             // Primeiro Ciclo acabou -> Descanso de 5 min
             modoAtual = "descanso";
-            minutos = 0;
-            segundos = 5;
+            minutos = 5;
+            segundos = 0;
         }
         else if(ciclosConcluidos === 2){
             // Segundo ciclo acabou
@@ -117,8 +117,8 @@ const gerenciarFimDeCiclo = () => {
             cronometroId = null;
             ciclosConcluidos = 0;
             modoAtual = "foco"
-            minutos = 0;
-            segundos = 5;
+            minutos = 25;
+            segundos = 0;
             secaoEstatisticas.hidden = false;
             timerPrevisao.hidden = true;
             
@@ -127,8 +127,8 @@ const gerenciarFimDeCiclo = () => {
     else if(modoAtual === "descanso"){
         // Descanso de 5 min acabou -> segundo ciclo de foco
         modoAtual = "foco"
-        minutos = 0;
-        segundos = 5;
+        minutos = 25;
+        segundos = 0;
     }
     atualizarDisplay(); // Atualiza os números da tela 
     atualizarStatusTexto();
