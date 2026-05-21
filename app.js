@@ -7,8 +7,11 @@ const timerPrevisao = document.getElementById("timerPrevisao");
 const secaoEstatisticas = document.querySelector(".estatisticas");
 
 // Variáveis do cronômetro
-let minutos = 25;
-let segundos = 0;
+const isTestMode = true;
+const TEMPO_FOCO_MIN = isTestMode ? 0 : 25;
+const TEMPO_FOCO_SEG = isTestMode ? 5 : 0;
+let minutos = TEMPO_FOCO_MIN
+let segundos = TEMPO_FOCO_SEG
 let cronometroId = null; 
 let modoAtual = "foco"; 
 let ciclosConcluidos = 0;
@@ -82,8 +85,8 @@ const pausarCronometro = () => {
 // função de Resetar
 const resetarCronometro = () => {
     clearInterval(cronometroId);
-    minutos = 25;
-    segundos = 0;
+    minutos = TEMPO_FOCO_MIN;
+    segundos = TEMPO_FOCO_SEG;
     modoAtual = "foco"
     ciclosConcluidos = 0;
     atualizarDisplay()
@@ -108,8 +111,8 @@ const gerenciarFimDeCiclo = () => {
         if(ciclosConcluidos === 1){
             // Primeiro Ciclo acabou -> Descanso de 5 min
             modoAtual = "descanso";
-            minutos = 5;
-            segundos = 0;
+            minutos = isTestMode ? 0 : 5;
+            segundos = isTestMode ? 5 : 0;
         }
         else if(ciclosConcluidos === 2){
             // Segundo ciclo acabou
@@ -117,8 +120,8 @@ const gerenciarFimDeCiclo = () => {
             cronometroId = null;
             ciclosConcluidos = 0;
             modoAtual = "foco"
-            minutos = 25;
-            segundos = 0;
+            minutos = TEMPO_FOCO_MIN;
+            segundos = TEMPO_FOCO_SEG;
             secaoEstatisticas.hidden = false;
             timerPrevisao.hidden = true;
             
@@ -127,8 +130,8 @@ const gerenciarFimDeCiclo = () => {
     else if(modoAtual === "descanso"){
         // Descanso de 5 min acabou -> segundo ciclo de foco
         modoAtual = "foco"
-        minutos = 25;
-        segundos = 0;
+        minutos = TEMPO_FOCO_MIN;
+        segundos = TEMPO_FOCO_SEG;
     }
     atualizarDisplay(); // Atualiza os números da tela 
     atualizarStatusTexto();
