@@ -7,7 +7,7 @@ const timerPrevisao = document.getElementById("timerPrevisao");
 const secaoEstatisticas = document.querySelector(".estatisticas");
 
 // Variáveis do cronômetro
-const isTestMode = true;
+const isTestMode = false;
 const TEMPO_FOCO_MIN = isTestMode ? 0 : 25;
 const TEMPO_FOCO_SEG = isTestMode ? 5 : 0;
 let minutos = TEMPO_FOCO_MIN
