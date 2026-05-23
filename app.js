@@ -37,7 +37,12 @@ const atualizarStatusTexto = () => {
     if(modoAtual === "foco"){
         if(ciclosConcluidos === 0){
             timerStatus.textContent = "Período de foco (1 de 2)";
-            timerPrevisao.innerHTML = "A seguir: <strong>5 min de intervalo</strong>";
+
+            if(TEMPO_FOCO_MIN >= 60){
+                timerPrevisao.innerHTML = "A Seguir: <strong>10 min de intervalor</strong>"
+            }else{
+               timerPrevisao.innerHTML = "A seguir: <strong>5 min de intervalo</strong>"; 
+            }
             botao.textContent = "Iniciar Ciclo ▶️";
         }else if(ciclosConcluidos === 1){
             timerStatus.textContent = "Período de foco (2 de 2)";
@@ -114,10 +119,15 @@ const gerenciarFimDeCiclo = () => {
         contadorPainel.textContent = totalCiclosDoDia;
 
         if(ciclosConcluidos === 1){
-            // Primeiro Ciclo acabou -> Descanso de 5 min
+            // Verifica se o tempo é maior ou igual 1h para adicionar 10 min
             modoAtual = "descanso";
-            minutos = isTestMode ? 0 : 5;
-            segundos = isTestMode ? 5 : 0;
+            if(TEMPO_FOCO_MIN >= 60){
+                minutos = isTestMode ? 0 : 10;
+                segundos = isTestMode ? 5 : 0;
+            }else{
+                minutos = isTestMode ? 0 : 5;
+                segundos = isTestMode ? 5 : 0;
+            }
         }
         else if(ciclosConcluidos === 2){
             // Segundo ciclo acabou
@@ -138,6 +148,7 @@ const gerenciarFimDeCiclo = () => {
         minutos = TEMPO_FOCO_MIN;
         segundos = TEMPO_FOCO_SEG;
     }
+
     atualizarDisplay(); // Atualiza os números da tela 
     atualizarStatusTexto();
 }
