@@ -1,8 +1,9 @@
 const btnAumentar = document.getElementById("btnAumentar");
 const btnDiminuir = document.getElementById("btnDiminuir");
+const painelSetas = document.getElementById("painelSetas")
 const botao = document.getElementById("btnIniciar");
 const botaoReset = document.getElementById("btnResetar")
-const display = document.querySelector(".tempoDisplay");
+const display = document.getElementById("tempoDisplay");
 const timerStatus = document.getElementById("timerStatus")
 const contadorPainel = document.getElementById("contadorPainel");
 const timerPrevisao = document.getElementById("timerPrevisao");
@@ -64,6 +65,7 @@ const iniciarCronometro = () => {
     atualizarStatusTexto();
     secaoEstatisticas.hidden = true;
     timerPrevisao.hidden = false;
+    painelSetas.classList.add("escondido")
     
     // API assíncrona (temporizador do browser)
     cronometroId = setInterval(() => {
@@ -105,6 +107,7 @@ const resetarCronometro = () => {
     //renderizar o diplay resetado
     botao.textContent = "Iniciar Ciclo ▶️";
     botaoReset.hidden = true;
+    painelSetas.classList.remove("escondido")
 
 }
 
@@ -139,7 +142,7 @@ const gerenciarFimDeCiclo = () => {
             segundos = TEMPO_FOCO_SEG;
             secaoEstatisticas.hidden = false;
             timerPrevisao.hidden = true;
-            
+            painelSetas.classList.remove("escondido")
         }
     }
     else if(modoAtual === "descanso"){

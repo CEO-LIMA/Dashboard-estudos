@@ -97,12 +97,60 @@ button {
     align-items: center;
     gap: 20px;
 }
+/* A caixa que junta o relógio e as setas lado a lado */
+#cronometro-container {
+    display: flex;
+    align-items: center; /* Alinha verticalmente o número e as setas no meio */
+    justify-content: center;
+    background-color: var(--bg-card); /* Fundo escuro idêntico ao da foto */
+    border: 1px solid #2d2d34; /* Borda bem sutil */
+    border-radius: 12px; /* Cantos arredondados finos */
+    padding: 10px 20px;
+    width: fit-content; /* A caixa só abraça o tamanho do conteúdo */
+    margin: 20px auto;
+}
 #tempoDisplay {
-    font-size: 4.5rem;
-    font-weight: 300;
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: monospace;
     letter-spacing: -2px;
     color: var(--texto-principal);
     transition: color 0.4s ease;
+}
+.container-setas {
+    display: flex;
+    flex-direction: column;    /* Força uma seta a ficar em cima da outra */
+    border-left: 1px solid #2d2d34; /* Linha vertical cinza separando as setas do número */
+    padding-left: 10px;
+    margin-left: 20px;
+
+    transition: opacity 0.03s ease, visibility 0.3s ease, width 0.3s ease, margin 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+    width: auto;
+
+}
+.container-setas.escondido {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 1px solid transparent;
+}
+.container-setas button {
+    background: none;
+    border: none;
+    color: var(--texto-suave); /* Cor cinza discreta para não brigar com o relógio */
+    font-size: 16px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    border-radius: 6px;
+}
+.container-setas button:hover {
+    color: var(--cor-destaque-hover); /* Acende a seta em branco */
+    background-color: #25252b; /* Fundo sutil para o clique */
 }
 
 .estatisticas {
