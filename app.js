@@ -1,7 +1,7 @@
 const btnAumentar = document.getElementById("btnAumentar");
 const btnDiminuir = document.getElementById("btnDiminuir");
 const painelSetas = document.getElementById("painelSetas")
-const botao = document.getElementById("btnIniciar");
+const botaoIniciar = document.getElementById("btnIniciar");
 const botaoReset = document.getElementById("btnResetar")
 const display = document.getElementById("tempoDisplay");
 const timerStatus = document.getElementById("timerStatus")
@@ -34,6 +34,7 @@ const atualizarDisplay = () => {
     display.textContent = `${minutosFormatados}:${segundosFormatados}`;
 }
 
+// Função de atualizar Texto
 const atualizarStatusTexto = () => {
     if(modoAtual === "foco"){
         if(ciclosConcluidos === 0){
@@ -44,7 +45,7 @@ const atualizarStatusTexto = () => {
             }else{
                timerPrevisao.innerHTML = "A seguir: <strong>5 min de intervalo</strong>"; 
             }
-            botao.textContent = "Iniciar Ciclo ▶️";
+            botaoIniciar.textContent = "Iniciar Ciclo ▶️";
         }else if(ciclosConcluidos === 1){
             timerStatus.textContent = "Período de foco (2 de 2)";
             timerPrevisao.innerHTML = "A seguir: <strong>fim do bloco</strong>"
@@ -66,6 +67,7 @@ const iniciarCronometro = () => {
     secaoEstatisticas.hidden = true;
     timerPrevisao.hidden = false;
     painelSetas.classList.add("escondido")
+
     
     // API assíncrona (temporizador do browser)
     cronometroId = setInterval(() => {
@@ -91,7 +93,9 @@ const iniciarCronometro = () => {
 const pausarCronometro = () => {
     clearInterval(cronometroId);
     cronometroId = null;
-    timerPrevisao.textContent = "Em Pausa"
+    timerPrevisao.textContent = "Em Pausa";
+
+
 }
 
 // função de Resetar
@@ -101,14 +105,14 @@ const resetarCronometro = () => {
     segundos = TEMPO_FOCO_SEG;
     modoAtual = "foco"
     ciclosConcluidos = 0;
-    atualizarDisplay()
-    atualizarStatusTexto()
+    atualizarDisplay();
+    atualizarStatusTexto();
     cronometroId = null;
     //renderizar o diplay resetado
-    botao.textContent = "Iniciar Ciclo ▶️";
-    botaoReset.hidden = true;
-    painelSetas.classList.remove("escondido")
-
+    botaoIniciar.classList.remove("redondo");
+    botaoIniciar.textContent = "Iniciar Ciclo ▶️";
+    botaoReset.classList.add("escondido")
+    painelSetas.classList.remove("escondido");
 }
 
 // Função de Ciclos
@@ -137,12 +141,13 @@ const gerenciarFimDeCiclo = () => {
             clearInterval(cronometroId);
             cronometroId = null;
             ciclosConcluidos = 0;
-            modoAtual = "foco"
+            modoAtual = "foco";
             minutos = TEMPO_FOCO_MIN;
             segundos = TEMPO_FOCO_SEG;
+            painelSetas.classList.remove("escondido");
+            botaoIniciar.classList.remove("redondo")
             secaoEstatisticas.hidden = false;
             timerPrevisao.hidden = true;
-            painelSetas.classList.remove("escondido")
         }
     }
     else if(modoAtual === "descanso"){
@@ -200,23 +205,24 @@ btnDiminuir.addEventListener("click", () =>{
 })
 
 // Evento de partida
-botao.addEventListener("click", () => {
+botaoIniciar.addEventListener("click", () => {
     // verifica se cronometro estar parado
     if(cronometroId === null){
         iniciarCronometro();
-        botao.textContent = "Pausar ⏸️"
+        botaoIniciar.classList.add("redondo");
+        botaoIniciar.textContent = "⏸️";
         display.style.color = "#61afef";
-        botaoReset.hidden = true;
+        botaoReset.classList.remove("remove");
     }else{
         pausarCronometro();
-        botao.textContent = "Iniciar ⏯️";
+        botaoIniciar.textContent = "▶️";
+        botaoReset.classList.remove("escondido");
         display.style.color = "#ffffff";
-        botaoReset.hidden = false;
     }
 
 });
 
 // Evento de resetar
 botaoReset.addEventListener("click", () => {
-    resetarCronometro()
+    resetarCronometro();
 })
