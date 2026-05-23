@@ -1,15 +1,20 @@
+const btnAumentar = document.getElementById("btnAumentar");
+const btnDiminuir = document.getElementById("btnDiminuir");
 const botao = document.getElementById("btnIniciar");
 const botaoReset = document.getElementById("btnResetar")
-const display = document.getElementById("tempoDisplay");
+const display = document.querySelector(".tempoDisplay");
 const timerStatus = document.getElementById("timerStatus")
 const contadorPainel = document.getElementById("contadorPainel");
 const timerPrevisao = document.getElementById("timerPrevisao");
 const secaoEstatisticas = document.querySelector(".estatisticas");
 
+
 // Variáveis do cronômetro
 const isTestMode = false;
-const TEMPO_FOCO_MIN = isTestMode ? 0 : 25;
-const TEMPO_FOCO_SEG = isTestMode ? 5 : 0;
+let TEMPO_FOCO_MIN = isTestMode ? 0 : 25;
+let TEMPO_FOCO_SEG = isTestMode ? 5 : 0;
+let minimo = 20;
+let maximo = 120;
 let minutos = TEMPO_FOCO_MIN
 let segundos = TEMPO_FOCO_SEG
 let cronometroId = null; 
@@ -161,6 +166,24 @@ const emitirBeep = () => {
         contexto.close();
     }, 200);
 }
+
+// Acrecenta 5 min no cronometro
+btnAumentar.addEventListener("click", () =>{
+    if(TEMPO_FOCO_MIN < maximo){
+        TEMPO_FOCO_MIN += 5;
+        minutos = TEMPO_FOCO_MIN;
+        atualizarDisplay();
+    }
+})
+
+// Decrescenta 5 min do cronometro
+btnDiminuir.addEventListener("click", () =>{
+    if(TEMPO_FOCO_MIN > 20){
+        TEMPO_FOCO_MIN -= 5;
+        minutos = TEMPO_FOCO_MIN;
+        atualizarDisplay();
+    }
+})
 
 // Evento de partida
 botao.addEventListener("click", () => {
