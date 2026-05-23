@@ -23,7 +23,9 @@
             </div>
             <div class="controles-container">
                 <button id="btnIniciar">Iniciar Ciclo ▶️</button>
-                <button id="btnResetar" class="escondido" title="Resetar">🔄</button>
+                <button id="btnResetar" class="escondido" title="Resetar">
+                    <i data-lucide="rotate-ccw"></i>
+                </button>
             </div>
             <p id="timerPrevisao"></p>
         </section>
@@ -32,6 +34,12 @@
             <p>Ciclos Completos Hoje: <span id="contadorPainel">0</span></p>
         </section>
     </main>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Esse comando lê a página e ativa todos os ícones dinamicamente
+        lucide.createIcons();
+    </script>
 
     <script src="app.js"></script>
 </body>

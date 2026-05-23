@@ -113,6 +113,7 @@ const resetarCronometro = () => {
     botaoIniciar.textContent = "Iniciar Ciclo ▶️";
     botaoReset.classList.add("escondido")
     painelSetas.classList.remove("escondido");
+    timerPrevisao.innerHTML = "<strong>Você terá apenas 1 intervalo</strong>"
 }
 
 // Função de Ciclos
@@ -210,12 +211,14 @@ botaoIniciar.addEventListener("click", () => {
     if(cronometroId === null){
         iniciarCronometro();
         botaoIniciar.classList.add("redondo");
-        botaoIniciar.textContent = "⏸️";
+        botaoIniciar.innerHTML = `<i data-lucide="pause"></i>`;
+        lucide.createIcons();
         display.style.color = "#61afef";
         botaoReset.classList.remove("remove");
     }else{
         pausarCronometro();
-        botaoIniciar.textContent = "▶️";
+        botaoIniciar.innerHTML = `<i data-lucide="play"></i>`;
+        lucide.createIcons();
         botaoReset.classList.remove("escondido");
         display.style.color = "#ffffff";
     }

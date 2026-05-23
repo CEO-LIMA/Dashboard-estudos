@@ -112,6 +112,11 @@ button {
     margin-top: 20px;
     width: 100%; /* Garante o alinhamento central correto na área */
 }
+.controles-container button i {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5px;
+}
 
 /* Área do Cronômetro */
 .cronometro {
