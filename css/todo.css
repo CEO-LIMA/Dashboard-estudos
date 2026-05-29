@@ -1,0 +1,89 @@
+:root {
+    --bg-principal: #121212; 
+    --bg-card: #1e1e1e;
+    --texto-principal: #e0e0e0;
+    --texto-suave: #a0a0a0;
+    --cor-destaque: #61afef;
+    --cor-destaque-hover: #4b96db;
+}
+
+.todo-container {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container h2 {
+    color: var(--texto-principal);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.todo-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.todo-input-group input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: var(--bg-principal);
+    color: var(--texto-principal);
+    font-size: 1rem;
+}
+
+.todo-input-group input:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+}
+
+.todo-input-group button {
+    padding: 10px 20px;
+    background-color: var(--cor-destaque);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.todo-input-group button:hover {
+    background-color: var(--cor-destaque-hover);
+}
+
+#listaTarefas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo base para cada item da lista que o JS vai criar */
+#listaTarefas li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-principal);
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    color: var(--texto-principal);
+    border-left: 4px solid var(--cor-destaque);
+}
+
+.input-erro {
+    border: 2px solid #ff6b6b !important; /* Borda vermelha de alerta */
+    animation: tremer 0.3s ease-in-out;    /* Ativa a animação por 0.3 segundos */
+}
+
+@keyframes tremer {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-4px); }
+}

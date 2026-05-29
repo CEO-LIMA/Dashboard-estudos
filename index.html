@@ -1,46 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meu Dashboard de Estudos</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:,">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/todo.css" />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
     <main class="container">
-        <h1 id="tituloDashboard">Dashboard de Estudos 🚀</h1>
-        
-        <section class="cronometro">
-            <h2 id="timerStatus">Pomodoro Pronto 🎯</h2>
-            <div id="cronometro-container">
-                <div id="tempoDisplay">25:00</div>
+      <h1 id="tituloDashboard">Dashboard de Estudos 🚀</h1>
 
-                <div id="painelSetas" class="container-setas">
-                    <button id="btnAumentar">▲</button>
-                    <button id="btnDiminuir">▼</button>
-                </div>
-            </div>
-            <div class="controles-container">
-                <button id="btnIniciar">Iniciar Ciclo ▶️</button>
-                <button id="btnResetar" class="escondido" title="Resetar">
-                    <i data-lucide="rotate-ccw"></i>
-                </button>
-            </div>
-            <p id="timerPrevisao"></p>
-        </section>
+      <section class="cronometro">
+        <h2 id="timerStatus">Pomodoro Pronto 🎯</h2>
+        <div id="cronometro-container">
+          <div id="tempoDisplay">25:00</div>
 
-        <section class="estatisticas" hidden>
-            <p>Ciclos Completos Hoje: <span id="contadorPainel">0</span></p>
-        </section>
+          <div id="painelSetas" class="container-setas">
+            <button id="btnAumentar">▲</button>
+            <button id="btnDiminuir">▼</button>
+          </div>
+        </div>
+        <div class="controles-container">
+          <button id="btnIniciar">Iniciar Ciclo ▶️</button>
+          <button id="btnResetar" class="escondido" title="Resetar">
+            <i data-lucide="rotate-ccw"></i>
+          </button>
+        </div>
+        <p id="timerPrevisao"></p>
+      </section>
+
+      <section class="estatisticas" hidden>
+        <p>Ciclos Completos Hoje: <span id="contadorPainel">0</span></p>
+      </section>
+
+      <div class="todo-container">
+        <h2>Minhas Tarefas</h2>
+
+        <div class="todo-input-group">
+          <input
+            type="text"
+            id="inputTarefa"
+            placeholder="Digite uma nova tarefa..."
+          />
+          <button id="btnAdicionar">Adicionar</button>
+        </div>
+
+        <ul id="listaTarefas"></ul>
+      </div>
     </main>
-    
+
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-        // Esse comando lê a página e ativa todos os ícones dinamicamente
-        lucide.createIcons();
+      // Esse comando lê a página e ativa todos os ícones dinamicamente
+      lucide.createIcons();
     </script>
 
     <script src="js/pomodoro.js"></script>
-</body>
+    <script src="js/todo.js"></script>
+  </body>
 </html>

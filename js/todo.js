@@ -3,8 +3,32 @@
 // ==========================================
 
 // [ ] PILAR 1: CRIAR TAREFA (CREATE)
-// -> Capturar o valor do input.
+// -> Capturar o valor do input
+const inputTarefa = document.getElementById("inputTarefa");
+const btnAdicionarTarefas = document.getElementById("btnAdicionar");
+const listaTarefas = document.getElementById("listaTarefas");
+
+btnAdicionarTarefas.addEventListener("click", (e) =>{
+    e.preventDefault();
 // -> Validar se o campo não está vazio (remover espaços com .trim()).
+    let tarefas = inputTarefa.value.trim();
+    if(tarefas === ""){
+        inputTarefa.classList.remove("input-erro");
+        inputTarefa.offsetWidth;
+        inputTarefa.placeholder = "Ei! Escreva uma tarefa real!";
+        inputTarefa.classList.add("input-erro");
+        inputTarefa.focus()
+        return;
+    }
+    let novoItem = document.createElement("li");
+    novoItem.textContent = tarefas;
+    listaTarefas.appendChild(novoItem);
+    inputTarefa.value = "";
+})
+inputTarefa.addEventListener("input", () =>{
+    inputTarefa.classList.remove("input-erro");
+    inputTarefa.placeholder = "Digite uma nova tarefa..."
+})
 // -> Criar o objeto da tarefa e empurrar (push) para o array principal.
 // -> Limpar o campo de texto após a criação.
 
