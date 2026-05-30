@@ -8,6 +8,8 @@ const inputTarefa = document.getElementById("inputTarefa");
 const btnAdicionarTarefas = document.getElementById("btnAdicionar");
 const listaTarefas = document.getElementById("listaTarefas");
 
+let listaDetarefasArray = [];
+
 btnAdicionarTarefas.addEventListener("click", (e) =>{
     e.preventDefault();
 // -> Validar se o campo não está vazio (remover espaços com .trim()).
@@ -21,16 +23,24 @@ btnAdicionarTarefas.addEventListener("click", (e) =>{
         return;
     }
     let novoItem = document.createElement("li");
-    novoItem.textContent = tarefas;
+    let textoNode = document.createTextNode(tarefas)
+    novoItem.appendChild(textoNode);
     listaTarefas.appendChild(novoItem);
+// -> Criar o objeto da tarefa e empurrar (push) para o array principal.
+    let novaTarefa = {
+        id: Date.now(),
+        texto: tarefas,
+        concluida: false
+    }
+    listaDetarefasArray.push(novaTarefa);
+// -> Limpar o campo de texto após a criação.
     inputTarefa.value = "";
 })
+
 inputTarefa.addEventListener("input", () =>{
     inputTarefa.classList.remove("input-erro");
     inputTarefa.placeholder = "Digite uma nova tarefa..."
 })
-// -> Criar o objeto da tarefa e empurrar (push) para o array principal.
-// -> Limpar o campo de texto após a criação.
 
 
 // [ ] PILAR 2: LISTAR TAREFAS (READ)
