@@ -22,10 +22,6 @@ btnAdicionarTarefas.addEventListener("click", (e) =>{
         inputTarefa.focus()
         return;
     }
-    let novoItem = document.createElement("li");
-    let textoNode = document.createTextNode(tarefas)
-    novoItem.appendChild(textoNode);
-    listaTarefas.appendChild(novoItem);
 // -> Criar o objeto da tarefa e empurrar (push) para o array principal.
     let novaTarefa = {
         id: Date.now(),
@@ -33,6 +29,12 @@ btnAdicionarTarefas.addEventListener("click", (e) =>{
         concluida: false
     }
     listaDetarefasArray.push(novaTarefa);
+// Renderização Visual
+    let novoItem = document.createElement("li");
+    novoItem.dataset.id = novaTarefa.id;
+    let textoNode = document.createTextNode(tarefas)
+    novoItem.appendChild(textoNode);
+    listaTarefas.appendChild(novoItem);
 // -> Limpar o campo de texto após a criação.
     inputTarefa.value = "";
 })

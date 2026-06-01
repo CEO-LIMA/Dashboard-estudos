@@ -38,14 +38,15 @@
       <div class="todo-container">
         <h2>Minhas Tarefas</h2>
 
-        <div class="todo-input-group">
+        <form class="todo-input-group">
           <input
             type="text"
             id="inputTarefa"
             placeholder="Digite uma nova tarefa..."
+            autofocus
           />
-          <button id="btnAdicionar">Adicionar</button>
-        </div>
+          <button type="submit" id="btnAdicionar">Adicionar</button>
+        </form>
 
         <ul id="listaTarefas"></ul>
       </div>
