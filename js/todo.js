@@ -31,9 +31,19 @@ btnAdicionarTarefas.addEventListener("click", (e) =>{
     listaDetarefasArray.push(novaTarefa);
 // Renderização Visual
     let novoItem = document.createElement("li");
+// Criar o botão X dinamicamente aqui
+    let buttonDelete = document.createElement("button");
+    buttonDelete.textContent = "X";
+// Escutar o clique no botão
+    buttonDelete.addEventListener("click", () => {
+        // Pegar o pai do botão e ler o dataset
+        let idCapturado = novoItem.dataset.id;
+        console.log("O ID capturado para deletar é:", idCapturado);
+    })
     novoItem.dataset.id = novaTarefa.id;
     let textoNode = document.createTextNode(tarefas)
     novoItem.appendChild(textoNode);
+    novoItem.appendChild(buttonDelete);
     listaTarefas.appendChild(novoItem);
 // -> Limpar o campo de texto após a criação.
     inputTarefa.value = "";

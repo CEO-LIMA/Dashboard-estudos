@@ -87,3 +87,19 @@
     50% { transform: translateX(6px); }
     75% { transform: translateX(-4px); }
 }
+
+/* Estilo do botão de deletar de dentro do li */
+.todo-container ul li button {
+  background: transparent;
+  border: none;
+  color: #888;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-left: auto; 
+  transition: color 0.2s ease, transform 0.2s ease; 
+}
+.todo-container ul li button:hover {
+  color: #ff4d4d; 
+  transform: scale(1.2); 
+}
