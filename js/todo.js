@@ -38,7 +38,11 @@ btnAdicionarTarefas.addEventListener("click", (e) =>{
     buttonDelete.addEventListener("click", () => {
         // Pegar o pai do botão e ler o dataset
         let idCapturado = novoItem.dataset.id;
-        console.log("O ID capturado para deletar é:", idCapturado);
+        // [ ] PILAR 2: LISTAR TAREFAS (READ)
+        listaDetarefasArray = listaDetarefasArray.filter(tarefa => Number(idCapturado) !== tarefa.id);
+        novoItem.remove()
+        console.log(listaDetarefasArray);
+        
     })
     novoItem.dataset.id = novaTarefa.id;
     let textoNode = document.createTextNode(tarefas)
