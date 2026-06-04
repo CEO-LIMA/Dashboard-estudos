@@ -29,53 +29,56 @@ btnAdicionarTarefas.addEventListener("click", (e) =>{
         concluida: false
     }
     listaDetarefasArray.push(novaTarefa);
-// Renderização Visual
-    let novoItem = document.createElement("li");
-// Criar o botão X dinamicamente aqui
-    let buttonDelete = document.createElement("button");
-    buttonDelete.textContent = "X";
-// Escutar o clique no botão
-    buttonDelete.addEventListener("click", () => {
-        // Pegar o pai do botão e ler o dataset
-        let idCapturado = novoItem.dataset.id;
-        // [ ] PILAR 2: LISTAR TAREFAS (READ)
-        listaDetarefasArray = listaDetarefasArray.filter(tarefa => Number(idCapturado) !== tarefa.id);
-        novoItem.remove()
-        console.log(listaDetarefasArray);
-        
-    })
-    novoItem.dataset.id = novaTarefa.id;
-    let textoNode = document.createTextNode(tarefas)
-    novoItem.appendChild(textoNode);
-    novoItem.appendChild(buttonDelete);
-    listaTarefas.appendChild(novoItem);
-// -> Limpar o campo de texto após a criação.
+    // Chama a função de Renderizar e limpar 
+    renderizarTarefas();
+    // -> Limpar o campo de texto após a criação.
     inputTarefa.value = "";
 })
-
 inputTarefa.addEventListener("input", () =>{
     inputTarefa.classList.remove("input-erro");
     inputTarefa.placeholder = "Digite uma nova tarefa..."
 })
 
-
 // [ ] PILAR 2: LISTAR TAREFAS (READ)
-// -> Limpar o contêiner HTML antes de renderizar para não duplicar.
-// -> Percorrer o array de tarefas (usando forEach).
-// -> Criar a estrutura HTML de forma dinâmica para cada tarefa.
-// -> Injetar a estrutura na tela.
-
+const renderizarTarefas = () => {
+    // -> Limpar o contêiner HTML antes de renderizar para não duplicar.
+    listaTarefas.innerHTML = "";
+    // 2. Checa se o disjuntor do array está vazio
+    if(listaDetarefasArray.length === 0){
+        listaTarefas.innerHTML = "<li>Nenhuma tarefa cadastrada.</li>";
+        return;
+    }
+    // -> Percorrer o array de tarefas.
+    listaDetarefasArray.forEach(tarefa => {
+    let novoItem = document.createElement("li");
+    // Cria o ID do objeto atual no dataset do LI
+    novoItem.dataset.id = tarefa.id;
+    // Cria o nó de texto usando o texto do objeto atual
+    let textoFormatado = tarefa.texto.charAt(0).toUpperCase() + tarefa.texto.slice(1);
+    let textoNode = document.createTextNode(textoFormatado);
+    novoItem.appendChild(textoNode);
+    // Cria e configura o botão
+    let buttonDelete = document.createElement("button");
+    buttonDelete.textContent = "X";
+    // Evento de delete com filter
+    buttonDelete.addEventListener("click", () =>{
+        let idCapturado = novoItem.dataset.id;
+        listaDetarefasArray = listaDetarefasArray.filter(t => Number(idCapturado) !== t.id);
+        // Chama a função de Renderizar as Tarefas
+        renderizarTarefas();
+    });
+    // Junta o botão ao LI e o LI ao UL
+    novoItem.appendChild(buttonDelete);
+    listaTarefas.appendChild(novoItem);
+    });
+    // -> Criar a estrutura HTML de forma dinâmica para cada tarefa.
+    // -> Injetar a estrutura na tela.
+}
 
 // [ ] PILAR 3: CONCLUIR TAREFA (UPDATE)
 // -> Capturar o clique na caixinha de seleção (checkbox) ou no texto.
 // -> Alternar o estado (true/false) da propriedade de conclusão no objeto.
 // -> Aplicar o estilo visual de "concluído" (ex: linha cortada no texto).
-
-
-// [ ] PILAR 4: DELETAR TAREFA (DELETE)
-// -> Capturar o clique no botão de lixeira.
-// -> Filtrar o array principal para remover o objeto correspondente.
-// -> Chamar a função de listar tarefas novamente para atualizar a tela.
 
 
 // [ ] BÔNUS TÉCNICO: PERSISTÊNCIA (localStorage)
