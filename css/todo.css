@@ -103,3 +103,12 @@
   color: #ff4d4d; 
   transform: scale(1.2); 
 }
+.todo-item {
+    display: flex;
+    align-items: center;       /* Alinha verticalmente o checkbox, texto e o X no centro */
+    justify-content: space-between;
+}
+.todo-item input[type="checkbox"]{
+    order: -1;
+    margin-right: 10px;
+}
