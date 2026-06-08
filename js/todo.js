@@ -73,13 +73,17 @@ const renderizarTarefas = () => {
     // Cria o elemneto input
     let checkBoxConcluir = document.createElement("input");
     checkBoxConcluir.type = "checkbox";
-
     checkBoxConcluir.addEventListener("change", () =>{
-        console.log("Mudei o estado da Tarefa" + tarefa.texto);
+        let tarefaEncontrada = listaDetarefasArray.find(item => item.id === tarefa.id);
+        console.log(tarefaEncontrada)
+        if(tarefaEncontrada){
+            tarefaEncontrada.concluida = checkBoxConcluir.checked;
+        }
     })
     novoItem.appendChild(checkBoxConcluir);
     listaTarefas.appendChild(novoItem);
     // -> Alternar o estado (true/false) da propriedade de conclusão no objeto.
+
     // -> Aplicar o estilo visual de "concluído" (ex: linha cortada no texto).
     // Cria o elemneto input
 
