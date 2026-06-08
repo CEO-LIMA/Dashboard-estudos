@@ -67,6 +67,22 @@ const renderizarTarefas = () => {
         // Chama a função de Renderizar as Tarefas
         renderizarTarefas();
     });
+
+    // [ ] PILAR 3: CONCLUIR TAREFA (UPDATE)
+
+    // Cria o elemneto input
+    let checkBoxConcluir = document.createElement("input");
+    checkBoxConcluir.type = "checkbox";
+
+    checkBoxConcluir.addEventListener("change", () =>{
+        console.log("Mudei o estado da Tarefa" + tarefa.texto);
+    })
+    novoItem.appendChild(checkBoxConcluir);
+    listaTarefas.appendChild(novoItem);
+    // -> Alternar o estado (true/false) da propriedade de conclusão no objeto.
+    // -> Aplicar o estilo visual de "concluído" (ex: linha cortada no texto).
+    // Cria o elemneto input
+
     // Junta o botão ao LI e o LI ao UL
     novoItem.appendChild(buttonDelete);
     listaTarefas.appendChild(novoItem);
