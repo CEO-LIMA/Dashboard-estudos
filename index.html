@@ -9,46 +9,65 @@
     <link rel="icon" href="data:," />
   </head>
   <body>
-    <main class="container">
-      <h1 id="tituloDashboard">Dashboard de Estudos 🚀</h1>
+    <main class="dashboard-layout">
+      <aside id="sidebar">
+        <h1 id="tituloDashboard">Dashboard de Estudos 🚀</h1>
+      </aside>
 
-      <section class="cronometro">
-        <h2 id="timerStatus">Pomodoro Pronto 🎯</h2>
-        <div id="cronometro-container">
-          <div id="tempoDisplay">25:00</div>
+      <div class="main-content">
+        <section id="secao-superior">
+          <section class="cronometro">
+            <h2 id="timerStatus">Pomodoro Pronto 🎯</h2>
 
-          <div id="painelSetas" class="container-setas">
-            <button id="btnAumentar">▲</button>
-            <button id="btnDiminuir">▼</button>
+            <div id="cronometro-container">
+              <div id="tempoDisplay">25:00</div>
+
+              <div id="painelSetas" class="container-setas">
+                <button id="btnAumentar">▲</button>
+                <button id="btnDiminuir">▼</button>
+              </div>
+            </div>
+
+            <div class="controles-container">
+              <button id="btnIniciar">Iniciar Ciclo ▶️</button>
+              <button id="btnResetar" class="escondido" title="Resetar">
+                <i data-lucide="rotate-ccw"></i>
+              </button>
+            </div>
+            <p id="timerPrevisao"></p>
+          </section>
+
+          <section class="estatisticas">
+            <p>Ciclos Completos Hoje: <span id="contadorPainel">0</span></p>
+          </section>
+        </section>
+
+        <section id="secao-todo">
+          <div class="todo-container">
+            <h2>Minhas Tarefas</h2>
+
+            <form class="todo-input-group">
+              <input
+                type="text"
+                id="inputTarefa"
+                placeholder="Digite uma nova tarefa..."
+                autofocus
+              />
+              <button type="submit" id="btnAdicionar">Adicionar</button>
+            </form>
+            <div class="listas-todo-wrapper">
+              <div class="bloco-lista">
+                <h3>Em Andamento</h3>
+                <ul id="listaTarefas"></ul>
+              </div>
+
+              <div class="bloco-lista">
+                <h3>Concluídas</h3>
+                <ul id="listaTarefasConcluidas"></ul>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="controles-container">
-          <button id="btnIniciar">Iniciar Ciclo ▶️</button>
-          <button id="btnResetar" class="escondido" title="Resetar">
-            <i data-lucide="rotate-ccw"></i>
-          </button>
-        </div>
-        <p id="timerPrevisao"></p>
-      </section>
-
-      <section class="estatisticas" hidden>
-        <p>Ciclos Completos Hoje: <span id="contadorPainel">0</span></p>
-      </section>
-
-      <div class="todo-container">
-        <h2>Minhas Tarefas</h2>
-
-        <form class="todo-input-group">
-          <input
-            type="text"
-            id="inputTarefa"
-            placeholder="Digite uma nova tarefa..."
-            autofocus
-          />
-          <button type="submit" id="btnAdicionar">Adicionar</button>
-        </form>
-
-        <ul id="listaTarefas"></ul>
+        </section>
       </div>
     </main>
 

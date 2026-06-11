@@ -97,11 +97,6 @@ const renderizarTarefas = () => {
     // -> Injetar a estrutura na tela.
 }
 
-// [ ] PILAR 3: CONCLUIR TAREFA (UPDATE)
-// -> Capturar o clique na caixinha de seleção (checkbox) ou no texto.
-// -> Alternar o estado (true/false) da propriedade de conclusão no objeto.
-// -> Aplicar o estilo visual de "concluído" (ex: linha cortada no texto).
-
 
 // [ ] BÔNUS TÉCNICO: PERSISTÊNCIA (localStorage)
 // -> Função para salvar o array atualizado no banco local (convertendo para string).
