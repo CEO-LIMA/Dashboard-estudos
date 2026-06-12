@@ -1,12 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+/* Paleta de Cores Oficial do Projeto - Identidade Visual Unificada */
+:root {
+    --bg-principal: #121212; 
+    --bg-card: #1e1e1e;
+    --texto-principal: #e0e0e0;
+    --texto-suave: #a0a0a0;
+    --cor-destaque: #61afef;
+    --cor-destaque-hover: #4b96db;
+}
+
 /* Configurações Globais da Tela */
 body {
     margin: 0;
     padding: 0;
-    background-color: #121214;
-    font-family: sans-serif;
-    color: #ffffff;
+    background-color: var(--bg-principal);
+    font-family: 'Inter', sans-serif;
+    color: var(--texto-principal);
 }
-
 /* O Contêiner Mestre em Grid (Sidebar + Conteúdo) */
 .dashboard-layout {
     display: grid;
@@ -42,7 +52,7 @@ body {
 
 /* Estilo padrão de Card para os blocos */
 .cronometro, .estatisticas, .todo-container {
-    background-color: #1a1a1e;
+    background-color: var(--bg-card);
     border: 1px solid #29292e;
     border-radius: 12px;
     padding: 24px;
@@ -78,7 +88,7 @@ body {
 
 /* Estiliza cada caixinha interna de estatística */
 .card-estatistica-item {
-    background-color: #121214;
+    background-color: var(--bg-principal);
     padding: 20px;
     border-radius: 8px;
     border: 1px solid #29292e;
@@ -92,8 +102,8 @@ body {
 .card-estatistica-item h3 {
     margin: 0 0 8px 0;
     font-size: 14px;
-    color: #a9a9b3;
-    text-transform: uppercase; /* Injeção correta da propriedade que causou o bug! */
+    color: var(--texto-suave);
+    text-transform: uppercase; 
 }
 
 .card-estatistica-item p {

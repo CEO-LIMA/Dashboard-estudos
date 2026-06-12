@@ -45,7 +45,7 @@
 .todo-input-group button {
     padding: 10px 20px;
     background-color: var(--cor-destaque);
-    color: white;
+    color: black;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -105,7 +105,7 @@
 }
 .todo-item {
     display: flex;
-    align-items: center;       /* Alinha verticalmente o checkbox, texto e o X no centro */
+    align-items: center; 
     justify-content: space-between;
 }
 .todo-item input[type="checkbox"]{
