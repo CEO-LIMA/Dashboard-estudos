@@ -16,18 +16,6 @@
     --cor-destaque-hover: #4b96db;
 }
 
-/* Corpo da pagina (Centralização da tela) */
-body {
-    background-color: var(--bg-principal);
-    color: var(--texto-principal);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-items: center;
-    padding: 20px;
-}
-
 /* Efeito de clique físico para ambos */
 button:active {
     transform: scale(0.98);
@@ -181,11 +169,6 @@ button {
     background-color: #25252b; /* Fundo sutil para o clique */
 }
 
-.estatisticas {
-    text-align: center;
-    color: var(--texto-suave);
-    margin-top: 15px;
-}
 #timerStatus {
     font-size: 1.2rem;
     font-weight: 500;

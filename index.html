@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meu Dashboard de Estudos</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/pomodoro.css" />
     <link rel="stylesheet" href="css/todo.css" />
     <link rel="icon" href="data:," />
   </head>
@@ -38,7 +39,22 @@
           </section>
 
           <section class="estatisticas">
-            <p>Ciclos Completos Hoje: <span id="contadorPainel">0</span></p>
+            <section class="estatisticas">
+              <div class="estatisticas-wrapper">
+                <div class="card-estatistica-item">
+                  <h3>Ciclos Concluídos</h3>
+                  <p><span id="contadorPainel">0</span></p>
+                </div>
+
+                <div class="card-estatistica-item">
+                  <h3>Tempo de Foco</h3>
+                  <p>
+                    <span id="tempoFocoPainel">0</span>
+                    <span class="unidade">min</span>
+                  </p>
+                </div>
+              </div>
+            </section>
           </section>
         </section>
 
