@@ -15,12 +15,10 @@
     --cor-destaque-hover: #4b96db;
 }
 
-/* Efeito de clique físico para ambos */
 button:active {
     transform: scale(0.98);
 }
 
-/* Painel Central */
 .container {
     background-color: var(--bg-card);
     padding: 40px;
@@ -36,7 +34,6 @@ h1 {
     font-weight: 500;
 }
 
-/* Estilo Geral dos Botões de Controle */
 button {
     padding: 12px 30px;
     font-size: 1rem;
@@ -48,7 +45,6 @@ button {
     font-family: inherit;
 }
 
-/* Customização do Botão Iniciar */
 #btnIniciar {
     background-color: var(--cor-destaque);
     color: #121212;
@@ -71,7 +67,6 @@ button {
     font-size: 1.2rem;    
 }
 
-/* Customização do Botão Resetar (Ganha vida aqui!) */
 #btnResetar {
     background-color: #2a2a2a; 
     color: var(--texto-principal);
@@ -86,19 +81,18 @@ button {
     font-size: 1.2rem;
 }
 #btnResetar:hover {
-    background-color: #333333; /* Feedback visual ao passar o mouse */
+    background-color: #333333;
 }
 #btnResetar.escondido {
     display: none !important;
 }
 
-/* Container que alinha os dois lado a lado */
 .controles-container {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
-    width: 100%; /* Garante o alinhamento central correto na área */
+    width: 100%; 
 }
 .controles-container button i {
     width: 20px;
@@ -106,23 +100,22 @@ button {
     stroke-width: 2.5px;
 }
 
-/* Área do Cronômetro */
 .cronometro {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0;
 }
-/* A caixa que junta o relógio e as setas lado a lado */
+
 #cronometro-container {
     display: flex;
-    align-items: center; /* Alinha verticalmente o número e as setas no meio */
+    align-items: center; 
     justify-content: center;
-    background-color: var(--bg-card); /* Fundo escuro idêntico ao da foto */
-    border: 1px solid #2d2d34; /* Borda bem sutil */
-    border-radius: 12px; /* Cantos arredondados finos */
+    background-color: var(--bg-card); 
+    border: 1px solid #2d2d34; 
+    border-radius: 12px; 
     padding: 10px 20px;
-    width: fit-content; /* A caixa só abraça o tamanho do conteúdo */
+    width: fit-content; 
     margin: 10px auto;
 }
 #tempoDisplay {
@@ -135,8 +128,8 @@ button {
 }
 .container-setas {
     display: flex;
-    flex-direction: column;    /* Força uma seta a ficar em cima da outra */
-    border-left: 1px solid #2d2d34; /* Linha vertical cinza separando as setas do número */
+    flex-direction: column;    
+    border-left: 1px solid #2d2d34; 
     padding-left: 10px;
     margin-left: 20px;
 
@@ -157,7 +150,7 @@ button {
 .container-setas button {
     background: none;
     border: none;
-    color: var(--texto-suave); /* Cor cinza discreta para não brigar com o relógio */
+    color: var(--texto-suave); 
     font-size: 16px;
     padding: 6px 12px;
     cursor: pointer;
@@ -165,8 +158,8 @@ button {
     border-radius: 6px;
 }
 .container-setas button:hover {
-    color: var(--cor-destaque-hover); /* Acende a seta em branco */
-    background-color: #25252b; /* Fundo sutil para o clique */
+    color: var(--cor-destaque-hover); 
+    background-color: #25252b; 
 }
 
 #timerStatus {

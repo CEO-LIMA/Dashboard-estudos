@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
-/* Paleta de Cores Oficial do Projeto - Identidade Visual Unificada */
 :root {
     --bg-principal: #121212; 
     --bg-card: #1e1e1e;
@@ -9,7 +8,6 @@
     --cor-destaque-hover: #4b96db;
 }
 
-/* Configurações Globais da Tela */
 body {
     margin: 0;
     padding: 0;
@@ -17,21 +15,18 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--texto-principal);
 }
-/* O Contêiner Mestre em Grid (Sidebar + Conteúdo) */
 .dashboard-layout {
     display: grid;
     grid-template-columns: 260px 1fr; 
     min-height: 100vh; 
 }
 
-/* Barra Lateral */
 #sidebar {
     background-color: #1a1a1e;
     padding: 24px;
     border-right: 1px solid #29292e;
 }
 
-/* Painel da Direita (Guarda os blocos) */
 .main-content {
     padding: 32px;
     display: flex;
@@ -42,7 +37,6 @@ body {
     margin: 0 auto;
 }
 
-/* Alinha Pomodoro e Estatísticas lado a lado */
 #secao-superior {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -50,7 +44,6 @@ body {
     align-items: stretch;
 }
 
-/* Estilo padrão de Card para os blocos */
 .sidebar, .cronometro, .estatisticas, .todo-container {
     background-color: var(--bg-card);
     border: 1px solid #29292e;
@@ -69,7 +62,6 @@ body {
     border-color: var(--cor-destaque); 
 }
 
-/* Alinha a lista de tarefas ativas e concluídas lado a lado */
 .listas-todo-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -84,16 +76,14 @@ body {
     border: 1px solid #29292e;
 }
 
-/* Organiza os dois sub-cards de estatísticas lado a lado */
 .estatisticas-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     height: 100%;
     flex: 1;
 }
 
-/* Estiliza cada caixinha interna de estatística */
 .card-estatistica-item {
     background-color: var(--bg-principal);
     padding: 20px;
@@ -119,6 +109,6 @@ body {
     font-weight: bold;
 }
 
-#contadorPainel { color: #00bcd4; }
+#contadorPainel { color: var(--cor-destaque); }
 #tempoFocoPainel { color: #4caf50; }
 .unidade { font-size: 16px; color: #ffffff; }

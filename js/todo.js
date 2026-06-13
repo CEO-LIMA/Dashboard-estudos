@@ -7,6 +7,9 @@
 const inputTarefa = document.getElementById("inputTarefa");
 const btnAdicionarTarefas = document.getElementById("btnAdicionar");
 const listaTarefas = document.getElementById("listaTarefas");
+const contadorPainel = document.getElementById("contadorPainel");
+const tempoFocoPainel = document.getElementById("tempoFocoPainel")
+const ofensivaPainel = document.getElementById("ofensivaPainel");
 
 let listaDetarefasArray = [];
 
