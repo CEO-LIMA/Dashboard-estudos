@@ -68,17 +68,38 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--bg-principal);
-    padding: 12px;
-    border-radius: 4px;
-    margin-bottom: 8px;
+    background-color: var(--bg-card);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-bottom: 10px;
     color: var(--texto-principal);
     border-left: 4px solid var(--cor-destaque);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#listaTarefas li:hover {
+    background-color: #2d2d33;
+    transform: translateY(-2px) translateX(6px);
+    box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.4);
+}
+#listaTarefas li.completed {
+    border-left-color: #2ecc71;
+    opacity: 0.5;
+}
+#listaTarefas li.completed span {
+    text-decoration: line-through;
+    color: var(--texto-suave);
+}
+.todo-item input[type="checkbox"] {
+    order: -1;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .input-erro {
-    border: 2px solid #ff6b6b !important; /* Borda vermelha de alerta */
-    animation: tremer 0.3s ease-in-out;    /* Ativa a animação por 0.3 segundos */
+    border: 2px solid #ff6b6b !important;
+    animation: tremer 0.3s ease-in-out;
 }
 
 @keyframes tremer {
@@ -107,6 +128,7 @@
     display: flex;
     align-items: center; 
     justify-content: space-between;
+
 }
 .todo-item input[type="checkbox"]{
     order: -1;
