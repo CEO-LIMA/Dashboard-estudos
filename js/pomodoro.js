@@ -6,13 +6,14 @@ const botaoReset = document.getElementById("btnResetar")
 const display = document.getElementById("tempoDisplay");
 const timerStatus = document.getElementById("timerStatus")
 const contadorPainel = document.getElementById("contadorPainel");
+const tempoFocoPainel = document.getElementById("tempoFocoPainel");
 const timerPrevisao = document.getElementById("timerPrevisao");
 const secaoEstatisticas = document.querySelector(".estatisticas");
 
 
 // Variáveis De Controle Simples
-const isTestMode = false;
-let TEMPO_FOCO_MIN = isTestMode ? 0 : 25;
+const isTestMode = true;
+let TEMPO_FOCO_MIN = isTestMode ? 1 : 25;
 let TEMPO_FOCO_SEG = isTestMode ? 5 : 0;
 let minimo = 10;
 let maximo = 120;
@@ -33,8 +34,14 @@ const atualizarDisplay = () => {
 
 // Renderiza as Estatiscas na tela
 const atualizarEstatisticas = () => {
-    localStorage.setItem("ciclosDoDia", JSON.stringify(totalCiclosDoDia))
-    contadorPainel.textContent = totalCiclosDoDia
+    localStorage.setItem("ciclosDoDia", JSON.stringify(totalCiclosDoDia));
+    contadorPainel.textContent = totalCiclosDoDia;
+
+    const minutosAtuaisNoCofre = localStorage.getItem("tempoFocoDoDia") === null ? 0 : parseInt(localStorage.getItem("tempoFocoDoDia"), 10);
+    const minutosAtualizados = TEMPO_FOCO_MIN + minutosAtuaisNoCofre;
+
+    localStorage.setItem("tempoFocoDoDia", JSON.stringify(minutosAtualizados));
+    tempoFocoPainel.textContent = minutosAtualizados;
 }
 
 // Controla as mensagens no painel orientando o usuário
