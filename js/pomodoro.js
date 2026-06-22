@@ -31,6 +31,10 @@ const atualizarDisplay = () => {
     display.textContent = `${minutosFormatados}:${segundosFormatados}`;
 }
 
+const atualizarEstatisticas = () => {
+
+}
+
 // Controla as mensagens no painel orientando o usuário
 const atualizarStatusTexto = () => {
     if(modoAtual === "foco"){

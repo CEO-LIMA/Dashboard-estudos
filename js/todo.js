@@ -99,7 +99,9 @@ const renderizarTarefas = () => {
     // -> Criar a estrutura HTML de forma dinâmica para cada tarefa.
     // -> Injetar a estrutura na tela.
 }
-
+const atualizarEstatisticas = () => {
+    console.log("Aló")
+}
 
 // [ ] BÔNUS TÉCNICO: PERSISTÊNCIA (localStorage)
 // -> Função para salvar o array atualizado no banco local (convertendo para string).
