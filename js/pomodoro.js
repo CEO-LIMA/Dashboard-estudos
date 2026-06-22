@@ -31,8 +31,10 @@ const atualizarDisplay = () => {
     display.textContent = `${minutosFormatados}:${segundosFormatados}`;
 }
 
+// Renderiza as Estatiscas na tela
 const atualizarEstatisticas = () => {
-
+    localStorage.setItem("ciclosDoDia", JSON.stringify(totalCiclosDoDia))
+    contadorPainel.textContent = totalCiclosDoDia
 }
 
 // Controla as mensagens no painel orientando o usuário
@@ -121,7 +123,7 @@ const gerenciarFimDeCiclo = () => {
         ciclosConcluidos++; // adiciona +1 ao contador
         totalCiclosDoDia++; // adiciona +1 ao Ciclos totais do Dia
 
-        contadorPainel.textContent = totalCiclosDoDia;
+        atualizarEstatisticas()
 
         if(ciclosConcluidos === 1){
             // Verifica se o tempo é maior ou igual 1h para adicionar 10 min
