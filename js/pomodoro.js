@@ -12,8 +12,8 @@ const secaoEstatisticas = document.querySelector(".estatisticas");
 
 
 // Variáveis De Controle Simples
-const isTestMode = true;
-let TEMPO_FOCO_MIN = isTestMode ? 1 : 25;
+const isTestMode = false;
+let TEMPO_FOCO_MIN = isTestMode ? 0 : 25;
 let TEMPO_FOCO_SEG = isTestMode ? 5 : 0;
 let minimo = 10;
 let maximo = 120;
@@ -24,7 +24,15 @@ let cronometroId = null;
 let modoAtual = "foco"; 
 let ciclosConcluidos = 0;
 let totalCiclosDoDia = 0;
+let totalMinutosDoDia = 0;
 
+// Função de inicializção verifica se o localStorage é null
+const inicializarAplicativo = () => {
+    totalCiclosDoDia = localStorage.getItem("ciclosDoDia") === null ? 0 : parseInt(localStorage.getItem("ciclosDoDia"), 10);
+    contadorPainel.textContent = totalCiclosDoDia;
+    totalMinutosDoDia = localStorage.getItem("tempoFocoDoDia") === null ? 0 : parseInt(localStorage.getItem("tempoFocoDoDia"), 10);
+    tempoFocoPainel.textContent = totalMinutosDoDia;
+}
 // Renderizar o cronômetro na tela
 const atualizarDisplay = () => {
     let minutosFormatados = minutos.toString().padStart(2, "0");
@@ -239,3 +247,5 @@ botaoIniciar.addEventListener("click", () => {
 botaoReset.addEventListener("click", () => {
     resetarCronometro();
 });
+// carrega o escript antes de renderizar o DOM
+document.addEventListener("DOMContentLoaded", inicializarAplicativo);
