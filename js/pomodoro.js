@@ -32,11 +32,33 @@ let pomodoroOfensiva = 0;
 
 // Função de inicializção verifica se o localStorage é null
 const inicializarAplicativo = () => {
-    pomodoroCiclosHoje = localStorage.getItem("pomodoro_ciclos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ciclos_hoje"), 10);
-    elCiclosHoje.textContent = pomodoroCiclosHoje;
+    // Cria a data de hoje zerada
+    const hoje = new Date();
+    hoje.setHours(0,0,0,0);
+    const dataParaOStorage = hoje.getTime();
+
+    // Puxa a data salva do localStorage
+    const dataSalvaRaw = localStorage.getItem("pomodoro_ultima_data");
+    const dataSalva = dataSalvaRaw ? parseInt(dataSalvaRaw, 10) : null;
+
+    // testar codições
+    if(dataSalva === null || dataParaOStorage > dataSalva){
+        // Reset do card 1: Novo dia ou primeiro acesso!
+        pomodoroCiclosHoje = 0;
+        localStorage.setItem("pomodoro_ciclos_hoje", JSON.stringify(0));
+        elCiclosHoje.textContent = 0;
+        // card 2
+        // card 3
+    }else{
+        // Mesmo Dia: carrega os ciclos acumulados do cofre normalmente
+        pomodoroCiclosHoje = localStorage.getItem("pomodoro_ciclos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ciclos_hoje"), 10);
+        elCiclosHoje.textContent = pomodoroCiclosHoje;
+    }
+    // carrega os minutos do dia
     pomodoroMinutosHoje = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
     elMinutosHoje.textContent = pomodoroMinutosHoje;
 }
+
 // Renderizar o cronômetro na tela
 const atualizarDisplay = () => {
     let minutosFormatados = minutos.toString().padStart(2, "0");
@@ -46,6 +68,12 @@ const atualizarDisplay = () => {
 
 // Renderiza as Estatiscas na tela
 const atualizarEstatisticas = () => {
+    // Cria a data de hoje Zerada
+    const hoje = new Date();
+    hoje.setHours(0,0,0,0);
+    const dataParaOStorage = hoje.getTime();
+    localStorage.setItem("pomodoro_ultima_data", JSON.stringify(dataParaOStorage))
+
     localStorage.setItem("pomodoro_ciclos_hoje", JSON.stringify(pomodoroCiclosHoje));
     elCiclosHoje.textContent = pomodoroCiclosHoje;
 
@@ -54,6 +82,8 @@ const atualizarEstatisticas = () => {
 
     localStorage.setItem("pomodoro_minutos_hoje", JSON.stringify(minutosAtualizados));
     elMinutosHoje.textContent = minutosAtualizados;
+
+
 }
 
 // Controla as mensagens no painel orientando o usuário
