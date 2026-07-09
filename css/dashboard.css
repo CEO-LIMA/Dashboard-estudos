@@ -100,14 +100,23 @@ body {
     margin: 0 0 8px 0;
     font-size: 14px;
     color: var(--texto-suave);
-    text-transform: uppercase; 
+    text-transform: uppercase;
+
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-estatistica-item p {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
     margin: 0;
     font-size: 32px;
     font-weight: bold;
 }
+
 
 #contadorPainel { color: var(--cor-destaque); }
 #tempoFocoPainel { color: #4caf50; }

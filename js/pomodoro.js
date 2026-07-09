@@ -5,15 +5,17 @@ const botaoIniciar = document.getElementById("btnIniciar");
 const botaoReset = document.getElementById("btnResetar")
 const display = document.getElementById("tempoDisplay");
 const timerStatus = document.getElementById("timerStatus")
-const contadorPainel = document.getElementById("contadorPainel");
-const tempoFocoPainel = document.getElementById("tempoFocoPainel");
+const elCiclosHoje = document.getElementById("contadorPainel");
+const elMinutosHoje = document.getElementById("tempoFocoPainel");
+const elMinutosOntem = document.getElementById("tempoFocoOntem");
+const elOfensiva = document.getElementById("ofensivaPainel");
 const timerPrevisao = document.getElementById("timerPrevisao");
 const secaoEstatisticas = document.querySelector(".estatisticas");
 
 
 // Variáveis De Controle Simples
-const isTestMode = false;
-let TEMPO_FOCO_MIN = isTestMode ? 0 : 25;
+const isTestMode = true;
+let TEMPO_FOCO_MIN = isTestMode ? 1 : 25;
 let TEMPO_FOCO_SEG = isTestMode ? 5 : 0;
 let minimo = 10;
 let maximo = 120;
@@ -23,15 +25,17 @@ let segundos = TEMPO_FOCO_SEG
 let cronometroId = null; 
 let modoAtual = "foco"; 
 let ciclosConcluidos = 0;
-let totalCiclosDoDia = 0;
-let totalMinutosDoDia = 0;
+let pomodoroCiclosHoje = 0;
+let pomodoroMinutosHoje = 0;
+let pomodoroMinutosOntem = 0;
+let pomodoroOfensiva = 0;
 
 // Função de inicializção verifica se o localStorage é null
 const inicializarAplicativo = () => {
-    totalCiclosDoDia = localStorage.getItem("ciclosDoDia") === null ? 0 : parseInt(localStorage.getItem("ciclosDoDia"), 10);
-    contadorPainel.textContent = totalCiclosDoDia;
-    totalMinutosDoDia = localStorage.getItem("tempoFocoDoDia") === null ? 0 : parseInt(localStorage.getItem("tempoFocoDoDia"), 10);
-    tempoFocoPainel.textContent = totalMinutosDoDia;
+    pomodoroCiclosHoje = localStorage.getItem("pomodoro_ciclos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ciclos_hoje"), 10);
+    elCiclosHoje.textContent = pomodoroCiclosHoje;
+    pomodoroMinutosHoje = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
+    elMinutosHoje.textContent = pomodoroMinutosHoje;
 }
 // Renderizar o cronômetro na tela
 const atualizarDisplay = () => {
@@ -42,14 +46,14 @@ const atualizarDisplay = () => {
 
 // Renderiza as Estatiscas na tela
 const atualizarEstatisticas = () => {
-    localStorage.setItem("ciclosDoDia", JSON.stringify(totalCiclosDoDia));
-    contadorPainel.textContent = totalCiclosDoDia;
+    localStorage.setItem("pomodoro_ciclos_hoje", JSON.stringify(pomodoroCiclosHoje));
+    elCiclosHoje.textContent = pomodoroCiclosHoje;
 
-    const minutosAtuaisNoCofre = localStorage.getItem("tempoFocoDoDia") === null ? 0 : parseInt(localStorage.getItem("tempoFocoDoDia"), 10);
+    const minutosAtuaisNoCofre = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
     const minutosAtualizados = TEMPO_FOCO_MIN + minutosAtuaisNoCofre;
 
-    localStorage.setItem("tempoFocoDoDia", JSON.stringify(minutosAtualizados));
-    tempoFocoPainel.textContent = minutosAtualizados;
+    localStorage.setItem("pomodoro_minutos_hoje", JSON.stringify(minutosAtualizados));
+    elMinutosHoje.textContent = minutosAtualizados;
 }
 
 // Controla as mensagens no painel orientando o usuário
@@ -136,7 +140,7 @@ const gerenciarFimDeCiclo = () => {
 
     if(modoAtual === "foco"){
         ciclosConcluidos++; // adiciona +1 ao contador
-        totalCiclosDoDia++; // adiciona +1 ao Ciclos totais do Dia
+        pomodoroCiclosHoje++; // adiciona +1 ao Ciclos totais do Dia
 
         atualizarEstatisticas()
 
