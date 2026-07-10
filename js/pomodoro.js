@@ -47,16 +47,34 @@ const inicializarAplicativo = () => {
         pomodoroCiclosHoje = 0;
         localStorage.setItem("pomodoro_ciclos_hoje", JSON.stringify(0));
         elCiclosHoje.textContent = 0;
-        // card 2
+
+        // Reset do card 2: Se atender a condição
+        if(dataSalva === null){
+            pomodoroMinutosOntem = 0;
+            pomodoroMinutosHoje = 0;
+            elMinutosOntem.textContent = `Ontem: ${pomodoroMinutosOntem} min`;
+            elMinutosHoje.textContent = pomodoroMinutosHoje;
+        }else{
+            const minutosAcumulados = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
+            pomodoroMinutosOntem = minutosAcumulados;
+            localStorage.setItem("pomodoro_minutos_ontem", JSON.stringify(pomodoroMinutosOntem));
+            elMinutosOntem.textContent = `Ontem: ${pomodoroMinutosOntem} min`;
+
+            pomodoroMinutosHoje = 0;
+            localStorage.setItem("pomodoro_minutos_hoje", JSON.stringify(0));
+            elMinutosHoje.textContent = 0;
+
+        }
         // card 3
     }else{
         // Mesmo Dia: carrega os ciclos acumulados do cofre normalmente
         pomodoroCiclosHoje = localStorage.getItem("pomodoro_ciclos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ciclos_hoje"), 10);
         elCiclosHoje.textContent = pomodoroCiclosHoje;
+        // carrega os minutos do dia
+        pomodoroMinutosHoje = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
+        elMinutosHoje.textContent = pomodoroMinutosHoje;
+
     }
-    // carrega os minutos do dia
-    pomodoroMinutosHoje = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
-    elMinutosHoje.textContent = pomodoroMinutosHoje;
 }
 
 // Renderizar o cronômetro na tela
