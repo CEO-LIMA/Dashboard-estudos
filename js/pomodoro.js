@@ -43,12 +43,12 @@ const inicializarAplicativo = () => {
 
     // testar codições
     if(dataSalva === null || dataParaOStorage > dataSalva){
-        // Reset do card 1: Novo dia ou primeiro acesso!
+        // Reset do card 1: Novo dia ou primeiro acesso!(Ciclos)
         pomodoroCiclosHoje = 0;
         localStorage.setItem("pomodoro_ciclos_hoje", JSON.stringify(0));
         elCiclosHoje.textContent = 0;
 
-        // Reset do card 2: Se atender a condição
+        // Reset do card 2 (Minutos e foco)
         if(dataSalva === null){
             pomodoroMinutosOntem = 0;
             pomodoroMinutosHoje = 0;
@@ -65,7 +65,19 @@ const inicializarAplicativo = () => {
             elMinutosHoje.textContent = 0;
 
         }
-        // card 3
+        // Reset card 3 (ofensiva)
+        const diferencaTempo = dataParaOStorage - dataSalva
+        if(dataSalva === null || diferencaTempo > 86400000){
+            // Primeiro acesso: usúario sem histórico 
+            pomodoroOfensiva = 0;
+            localStorage.setItem("pomodoro_ofensiva", JSON.stringify(0));
+            elOfensiva.textContent = 0;
+        }else{// O usuario manteve a ofensiva do dia seguinte
+            pomodoroOfensiva = localStorage.getItem("pomodoro_ofensiva") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ofensiva"), 10);
+            elOfensiva.textContent = `${pomodoroOfensiva}🔥`;
+        }
+        localStorage.setItem("pomodoro_ultima_data", JSON.stringify(dataParaOStorage));
+
     }else{
         // Mesmo Dia: carrega os ciclos acumulados do cofre normalmente
         pomodoroCiclosHoje = localStorage.getItem("pomodoro_ciclos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ciclos_hoje"), 10);
@@ -73,6 +85,12 @@ const inicializarAplicativo = () => {
         // carrega os minutos do dia
         pomodoroMinutosHoje = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
         elMinutosHoje.textContent = pomodoroMinutosHoje;
+        // carrega os minutos de ontem
+        pomodoroMinutosOntem = localStorage.getItem("pomodoro_minutos_ontem") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_ontem"), 10);
+        elMinutosOntem.textContent = `Ontem ${pomodoroMinutosOntem} min`;
+        // carrega a ofensiva
+        pomodoroOfensiva = localStorage.getItem("pomodoro_ofensiva") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ofensiva"), 10);
+        elOfensiva.textContent = `${pomodoroOfensiva}🔥`;
 
     }
 }
@@ -90,17 +108,26 @@ const atualizarEstatisticas = () => {
     const hoje = new Date();
     hoje.setHours(0,0,0,0);
     const dataParaOStorage = hoje.getTime();
-    localStorage.setItem("pomodoro_ultima_data", JSON.stringify(dataParaOStorage))
-
+    // pega os ciclos de hoje e atauliza o painel dos ciclos concluidos
     localStorage.setItem("pomodoro_ciclos_hoje", JSON.stringify(pomodoroCiclosHoje));
     elCiclosHoje.textContent = pomodoroCiclosHoje;
-
+    // pega os minutos do localStorage soma 
     const minutosAtuaisNoCofre = localStorage.getItem("pomodoro_minutos_hoje") === null ? 0 : parseInt(localStorage.getItem("pomodoro_minutos_hoje"), 10);
     const minutosAtualizados = TEMPO_FOCO_MIN + minutosAtuaisNoCofre;
-
+    // Salva os minutos atualizados novamente no localStorage e atauliza o painel Tempo de Foco 
     localStorage.setItem("pomodoro_minutos_hoje", JSON.stringify(minutosAtualizados));
-    elMinutosHoje.textContent = minutosAtualizados;
-
+    elMinutosHoje.textContent = `${minutosAtualizados}`;
+    // Pega a ofensiva do localStorage atauliza
+    if(pomodoroCiclosHoje === 1){
+        const ofensivaAtualNoCofre = localStorage.getItem("pomodoro_ofensiva") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ofensiva"), 10);
+        const ofensivaAtualizada = ofensivaAtualNoCofre + 1;
+        // Salva ofensiva atualizada e atualiza o painel da ofensiva
+        localStorage.setItem("pomodoro_ofensiva", JSON.stringify(ofensivaAtualizada));
+        elOfensiva.textContent = `${ofensivaAtualizada}🔥`;
+    }else{
+        const ofensivaAtualNoCofre = localStorage.getItem("pomodoro_ofensiva") === null ? 0 : parseInt(localStorage.getItem("pomodoro_ofensiva"), 10);
+        elOfensiva.textContent = `${ofensivaAtualNoCofre}🔥`;
+    }
 
 }
 
