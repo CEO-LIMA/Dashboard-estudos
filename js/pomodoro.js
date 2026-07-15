@@ -147,7 +147,7 @@ const atualizarEstatisticas = () => {
       localStorage.getItem("pomodoro_ofensiva") === null
         ? 0
         : parseInt(localStorage.getItem("pomodoro_ofensiva"), 10);
-    elOfensiva.textContent = `${ofensivaAtualNoCofre}🔥`;
+    elOfensiva.textContent = `${ofensivaAtualNoCofre} 🔥`;
   }
 };
 
@@ -307,7 +307,7 @@ const inicializarAplicativo = () => {
         localStorage.getItem("pomodoro_ofensiva") === null
           ? 0
           : parseInt(localStorage.getItem("pomodoro_ofensiva"), 10);
-      elOfensiva.textContent = `${pomodoroOfensiva}🔥`;
+      elOfensiva.textContent = `${pomodoroOfensiva} 🔥`;
     }
     localStorage.setItem(
       "pomodoro_ultima_data",
@@ -337,7 +337,7 @@ const inicializarAplicativo = () => {
       localStorage.getItem("pomodoro_ofensiva") === null
         ? 0
         : parseInt(localStorage.getItem("pomodoro_ofensiva"), 10);
-    elOfensiva.textContent = `${pomodoroOfensiva}🔥`;
+    elOfensiva.textContent = `${pomodoroOfensiva} 🔥`;
   }
 };
 

@@ -116,6 +116,12 @@ body {
     font-size: 32px;
     font-weight: bold;
 }
+.card-estatistica-item small {
+    display: block;
+    color: var(--texto-suave);
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
 
 
 #contadorPainel { color: var(--cor-destaque); }
