@@ -7,9 +7,7 @@
 const inputTarefa = document.getElementById("inputTarefa");
 const btnAdicionarTarefas = document.getElementById("btnAdicionar");
 const listaTarefas = document.getElementById("listaTarefas");
-const contadorPainel = document.getElementById("contadorPainel");
-const tempoFocoPainel = document.getElementById("tempoFocoPainel")
-const ofensivaPainel = document.getElementById("ofensivaPainel");
+const listaConcluidas = document.getElementById("listaTarefasConcluidas");
 
 let listaDetarefasArray = [];
 
@@ -85,22 +83,25 @@ const renderizarTarefas = () => {
             tarefaEncontrada.concluida = checkBoxConcluir.checked;
         }
         console.log(tarefaEncontrada)
+        // -> Injetar a estrutura na tela.
+        renderizarTarefas();
     })
     novoItem.appendChild(checkBoxConcluir);
-    listaTarefas.appendChild(novoItem);
 
-    // -> Aplicar o estilo visual de "concluído" (ex: linha cortada no texto).
-    // Cria o elemneto input
+    // -> Aplicar o estilo visual de "concluído"
+    if(tarefa.concluida === true){
+        novoItem.classList.add("conluida");
+        checkBoxConcluir.checked = true;
+        listaConcluidas.appendChild(novoItem);
+    }else{
+        novoItem.classList.remove("conlcuida");
+        checkBoxConcluir.checked = false;
+        listaTarefas.appendChild(novoItem);
+    }
 
     // Junta o botão ao LI e o LI ao UL
     novoItem.appendChild(buttonDelete);
-    listaTarefas.appendChild(novoItem);
     });
-    // -> Criar a estrutura HTML de forma dinâmica para cada tarefa.
-    // -> Injetar a estrutura na tela.
-}
-const atualizarEstatisticas = () => {
-    console.log("Aló")
 }
 
 // [ ] BÔNUS TÉCNICO: PERSISTÊNCIA (localStorage)
