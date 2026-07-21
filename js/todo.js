@@ -44,11 +44,7 @@ inputTarefa.addEventListener("input", () =>{
 const renderizarTarefas = () => {
     // -> Limpar o contêiner HTML antes de renderizar para não duplicar.
     listaTarefas.innerHTML = "";
-    // 2. Checa se o disjuntor do array está vazio
-    if(listaDetarefasArray.length === 0){
-        listaTarefas.innerHTML = "<li>Nenhuma tarefa cadastrada.</li>";
-        return;
-    }
+    listaConcluidas.innerHTML = "";
     // -> Percorrer o array de tarefas.
     listaDetarefasArray.forEach(tarefa => {
     let novoItem = document.createElement("li");
@@ -98,11 +94,17 @@ const renderizarTarefas = () => {
         checkBoxConcluir.checked = false;
         listaTarefas.appendChild(novoItem);
     }
-
-    // Junta o botão ao LI e o LI ao UL
+    
     novoItem.appendChild(buttonDelete);
     });
-}
+
+    if(listaTarefas.children.length === 0){
+        listaTarefas.innerHTML = "<li>Nenhuma tarefa em andamento.</>";
+    }
+    if(listaConcluidas.children.length === 0){
+        listaConcluidas.innerHTML = "<li>Nenhuma tarefa concluída.</li>";
+    }
+};
 
 // [ ] BÔNUS TÉCNICO: PERSISTÊNCIA (localStorage)
 // -> Função para salvar o array atualizado no banco local (convertendo para string).
