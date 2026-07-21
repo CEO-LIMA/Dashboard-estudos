@@ -5,6 +5,7 @@
     --texto-suave: #a0a0a0;
     --cor-destaque: #61afef;
     --cor-destaque-hover: #4b96db;
+    --cor-destaque-concluidas: #2ecc71;
 }
 
 .todo-container {
@@ -70,7 +71,7 @@
     background-color: var(--bg-card);
     padding: 14px 18px;
     border-radius: 6px;
-    margin-bottom: 10px;
+    margin: 10px 0 10px;
     color: var(--texto-principal);
     border-left: 4px solid var(--cor-destaque);
     cursor: pointer;
@@ -82,10 +83,6 @@
     transform: translateY(-2px) translateX(6px);
     box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.4);
 }
-#listaTarefas li.completed {
-    border-left-color: #2ecc71;
-    opacity: 0.5;
-}
 #listaTarefas li.completed span {
     text-decoration: line-through;
     color: var(--texto-suave);
@@ -94,6 +91,29 @@
     order: -1;
     margin-right: 10px;
     cursor: pointer;
+}
+
+#listaTarefasConcluidas li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-card);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 10px 0 10px;
+    color: var(--texto-principal);
+    border-left: 4px solid var(--cor-destaque-concluidas);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#listaTarefasConcluidas li:hover {
+    background-color: #2d2d33;
+    transform: translateY(-2px) translateX(6px);
+    box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.4);
+}
+#listaTarefasConcluidas input[type="checkbox"] {
+    accent-color: var(--cor-destaque-concluidas);
 }
 
 .input-erro {
