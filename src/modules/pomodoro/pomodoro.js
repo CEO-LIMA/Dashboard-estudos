@@ -1,16 +1,8 @@
 // Elementos HTML
-const btnAumentar = document.getElementById("btnAumentar");
-const btnDiminuir = document.getElementById("btnDiminuir");
-const painelSetas = document.getElementById("painelSetas");
-const botaoIniciar = document.getElementById("btnIniciar");
-const botaoReset = document.getElementById("btnResetar");
-const display = document.getElementById("tempoDisplay");
-const timerStatus = document.getElementById("timerStatus");
 const elCiclosHoje = document.getElementById("contadorPainel");
 const elMinutosHoje = document.getElementById("tempoFocoPainel");
 const elMinutosOntem = document.getElementById("tempoFocoOntem");
 const elOfensiva = document.getElementById("ofensivaPainel");
-const timerPrevisao = document.getElementById("timerPrevisao");
 const secaoEstatisticas = document.querySelector(".estatisticas");
 
 // Variáveis De Controle
@@ -30,24 +22,33 @@ let pomodoroMinutosHoje = 0;
 let pomodoroMinutosOntem = 0;
 let pomodoroOfensiva = 0;
 
+export const getEstado = () => {
+  return {
+    minutos,
+    segundos,
+    modoAtual,
+    ciclosConcluidos,
+  };
+};
+
 // Formata os minutos acumulados acima de 60 min para horas
 const formatarTempoAcumulado = (minutosTotais) => {
   let horas;
   let minutos;
   // verifica se os minutos passaram ou não dos 60min
-  if(minutosTotais < 60){
+  if (minutosTotais < 60) {
     return `${minutosTotais} min`;
-  }else if(minutosTotais >= 60){
+  } else if (minutosTotais >= 60) {
     horas = Math.floor(minutosTotais / 60);
     minutos = minutosTotais % 60;
-    // verifica se o resto é zero antes de decidir qual vai retonar 
-    if(minutos === 0){
-      return `${horas}h`
+    // verifica se o resto é zero antes de decidir qual vai retonar
+    if (minutos === 0) {
+      return `${horas}h`;
     }
-    return `${horas}h, ${minutos}min`
+    return `${horas}h, ${minutos}min`;
   }
   return;
-}
+};
 
 // Função de aviso sonoro
 const emitirBeep = () => {
@@ -72,13 +73,6 @@ const emitirBeep = () => {
     oscilador.stop();
     contexto.close();
   }, 200);
-};
-
-// Renderizar o cronômetro na tela
-const atualizarDisplay = () => {
-  let minutosFormatados = minutos.toString().padStart(2, "0");
-  let segundosFormatados = segundos.toString().padStart(2, "0");
-  display.textContent = `${minutosFormatados}:${segundosFormatados}`;
 };
 
 // Controla as mensagens no painel orientando o usuário
@@ -153,21 +147,26 @@ const atualizarEstatisticas = () => {
 
 // Temporizador assíncrono do navegador
 const iniciarCronometro = () => {
+  //Estado/Lógica
   // verifica se o cronômetro já foi iniciado
   if (cronometroId !== null) return;
   if (TEMPO_FOCO_MIN >= 60 && ciclosConcluidos === 0) {
     minutos = TEMPO_FOCO_MIN / 2;
   }
 
+  // Render
   atualizarStatusTexto();
   secaoEstatisticas.hidden = true;
   timerPrevisao.hidden = false;
   painelSetas.classList.add("escondido");
 
+  //Estado/Lógica
   cronometroId = setInterval(() => {
     // verifica se minutos e segundos são 0
     if (segundos === 0 && minutos === 0) {
+      //Efeito colateral
       emitirBeep();
+      //Estado/Lógica
       gerenciarFimDeCiclo();
       return;
     }
@@ -178,6 +177,7 @@ const iniciarCronometro = () => {
       segundos--;
     }
 
+    //Render
     atualizarDisplay();
   }, 1000);
 };
@@ -190,21 +190,14 @@ const pausarCronometro = () => {
 };
 
 // Função de reset
-const resetarCronometro = () => {
+export const resetarCronometro = () => {
+  //estado/lógica
   clearInterval(cronometroId);
   minutos = TEMPO_FOCO_MIN;
   segundos = TEMPO_FOCO_SEG;
   modoAtual = "foco";
   ciclosConcluidos = 0;
-  atualizarDisplay();
-  atualizarStatusTexto();
   cronometroId = null;
-  //renderizar o diplay resetado
-  botaoIniciar.classList.remove("redondo");
-  botaoIniciar.textContent = "Iniciar Ciclo ▶️";
-  botaoReset.classList.add("escondido");
-  painelSetas.classList.remove("escondido");
-  timerPrevisao.innerHTML = "<strong>Você terá apenas 1 intervalo</strong>";
 };
 
 // Função de Ciclos
@@ -276,7 +269,7 @@ const inicializarAplicativo = () => {
     if (dataSalva === null) {
       pomodoroMinutosOntem = 0;
       pomodoroMinutosHoje = 0;
-      elMinutosOntem.textContent =  `Ontem ${formatarTempoAcumulado(pomodoroMinutosOntem)}`;
+      elMinutosOntem.textContent = `Ontem ${formatarTempoAcumulado(pomodoroMinutosOntem)}`;
       elMinutosHoje.textContent = `${formatarTempoAcumulado(pomodoroMinutosHoje)}`;
     } else {
       const minutosAcumulados =
