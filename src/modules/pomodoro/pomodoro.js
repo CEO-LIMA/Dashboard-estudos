@@ -17,6 +17,7 @@ let segundos = TEMPO_FOCO_SEG;
 let cronometroId = null;
 let modoAtual = "foco";
 let ciclosConcluidos = 0;
+let status = "parado";
 let pomodoroCiclosHoje = 0;
 let pomodoroMinutosHoje = 0;
 let pomodoroMinutosOntem = 0;
@@ -28,6 +29,8 @@ export const getEstado = () => {
     segundos,
     modoAtual,
     ciclosConcluidos,
+    status,
+    tempoFocoMin:TEMPO_FOCO_MIN,
   };
 };
 
@@ -73,30 +76,6 @@ const emitirBeep = () => {
     oscilador.stop();
     contexto.close();
   }, 200);
-};
-
-// Controla as mensagens no painel orientando o usuário
-const atualizarStatusTexto = () => {
-  if (modoAtual === "foco") {
-    if (ciclosConcluidos === 0) {
-      timerStatus.textContent = "Período de foco (1 de 2)";
-
-      if (TEMPO_FOCO_MIN >= 60) {
-        timerPrevisao.innerHTML =
-          "A Seguir: <strong>10 min de intervalor</strong>";
-      } else {
-        timerPrevisao.innerHTML =
-          "A seguir: <strong>5 min de intervalo</strong>";
-      }
-      botaoIniciar.textContent = "Iniciar Ciclo ▶️";
-    } else if (ciclosConcluidos === 1) {
-      timerStatus.textContent = "Período de foco (2 de 2)";
-      timerPrevisao.innerHTML = "A seguir: <strong>fim do bloco</strong>";
-    }
-  } else if (modoAtual === "descanso") {
-    timerStatus.textContent = "Intervalo ☕";
-    timerPrevisao.innerHTML = "A seguir: <strong>25 min de foco</strong>";
-  }
 };
 
 // Renderiza as Estatiscas na tela
@@ -146,16 +125,15 @@ const atualizarEstatisticas = () => {
 };
 
 // Temporizador assíncrono do navegador
-const iniciarCronometro = () => {
+export const iniciarCronometro = (callback) => {
   //Estado/Lógica
   // verifica se o cronômetro já foi iniciado
   if (cronometroId !== null) return;
+  status = "executando";
   if (TEMPO_FOCO_MIN >= 60 && ciclosConcluidos === 0) {
     minutos = TEMPO_FOCO_MIN / 2;
   }
 
-  // Render
-  atualizarStatusTexto();
   secaoEstatisticas.hidden = true;
   timerPrevisao.hidden = false;
   painelSetas.classList.add("escondido");
@@ -176,16 +154,15 @@ const iniciarCronometro = () => {
     } else {
       segundos--;
     }
-
-    //Render
-    atualizarDisplay();
+      callback();
   }, 1000);
 };
 
 // Função de pausar
-const pausarCronometro = () => {
+export const pausarCronometro = () => {
   clearInterval(cronometroId);
   cronometroId = null;
+  status = "pausado";
   timerPrevisao.textContent = "Em Pausa";
 };
 
@@ -198,6 +175,8 @@ export const resetarCronometro = () => {
   modoAtual = "foco";
   ciclosConcluidos = 0;
   cronometroId = null;
+
+  status = "parado";
 };
 
 // Função de Ciclos
@@ -356,26 +335,6 @@ btnDiminuir.addEventListener("click", () => {
     minutos = TEMPO_FOCO_MIN;
     atualizarDisplay();
   }
-});
-botaoIniciar.addEventListener("click", () => {
-  // verifica se cronometro estar parado
-  if (cronometroId === null) {
-    iniciarCronometro();
-    botaoIniciar.classList.add("redondo");
-    botaoIniciar.innerHTML = `<i data-lucide="pause"></i>`;
-    lucide.createIcons();
-    display.style.color = "#61afef";
-    botaoReset.classList.remove("remove");
-  } else {
-    pausarCronometro();
-    botaoIniciar.innerHTML = `<i data-lucide="play"></i>`;
-    lucide.createIcons();
-    botaoReset.classList.remove("escondido");
-    display.style.color = "#ffffff";
-  }
-});
-botaoReset.addEventListener("click", () => {
-  resetarCronometro();
 });
 // carrega o escript antes de renderizar o DOM
 document.addEventListener("DOMContentLoaded", inicializarAplicativo);
