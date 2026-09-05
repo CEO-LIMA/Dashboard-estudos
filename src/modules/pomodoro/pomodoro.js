@@ -134,10 +134,6 @@ export const iniciarCronometro = (callback) => {
     minutos = TEMPO_FOCO_MIN / 2;
   }
 
-  secaoEstatisticas.hidden = true;
-  timerPrevisao.hidden = false;
-  painelSetas.classList.add("escondido");
-
   //Estado/Lógica
   cronometroId = setInterval(() => {
     // verifica se minutos e segundos são 0
@@ -146,6 +142,8 @@ export const iniciarCronometro = (callback) => {
       emitirBeep();
       //Estado/Lógica
       gerenciarFimDeCiclo();
+
+      callback();
       return;
     }
     if (segundos === 0) {
@@ -163,6 +161,7 @@ export const pausarCronometro = () => {
   clearInterval(cronometroId);
   cronometroId = null;
   status = "pausado";
+  // manipulação visual → deve ir para o render
   timerPrevisao.textContent = "Em Pausa";
 };
 
@@ -181,7 +180,6 @@ export const resetarCronometro = () => {
 
 // Função de Ciclos
 const gerenciarFimDeCiclo = () => {
-  emitirBeep(); // Aviso sonoro toca no fim
 
   if (modoAtual === "foco") {
     ciclosConcluidos++; // adiciona +1 ao contador
@@ -207,10 +205,7 @@ const gerenciarFimDeCiclo = () => {
       modoAtual = "foco";
       minutos = TEMPO_FOCO_MIN;
       segundos = TEMPO_FOCO_SEG;
-      painelSetas.classList.remove("escondido");
-      botaoIniciar.classList.remove("redondo");
-      secaoEstatisticas.hidden = false;
-      timerPrevisao.hidden = true;
+      status = "parado";
     }
   } else if (modoAtual === "descanso") {
     // Descanso acabou volta para segundo bloco
@@ -222,8 +217,6 @@ const gerenciarFimDeCiclo = () => {
     }
     segundos = TEMPO_FOCO_SEG;
   }
-  atualizarDisplay();
-  atualizarStatusTexto();
 };
 
 // Função de inicializção verifica se o localStorage é null
