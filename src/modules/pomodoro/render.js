@@ -17,29 +17,25 @@ export const atualizarDisplay = (estado) => {
 
 // Controla as mensagens no painel orientando o usuário
 export const atualizarStatusTexto = (estado) => {
+  
   if (estado.modoAtual === "foco") {
     if (estado.ciclosConcluidos === 0) {
       timerStatus.textContent = "Período de foco (1 de 2)";
 
       if (estado.tempoFocoMin >= 60) {
-        // manipulação visual → já está no módulo correto
         timerPrevisao.innerHTML =
           "A Seguir: <strong>10 min de intervalor</strong>";
       } else {
-        // manipulação visual → já está no módulo correto
         timerPrevisao.innerHTML =
           "A seguir: <strong>5 min de intervalo</strong>";
       }
-      //manipulação visual → já está no módulo correto
       botaoIniciar.textContent = "Iniciar Ciclo ▶️";
     } else if (estado.ciclosConcluidos === 1) {
       timerStatus.textContent = "Período de foco (2 de 2)";
-      // manipulação visual → já está no módulo correto
       timerPrevisao.innerHTML = "A seguir: <strong>fim do bloco</strong>";
     }
   } else if (estado.modoAtual === "descanso") {
     timerStatus.textContent = "Intervalo ☕";
-    // manipulação visual → já está no módulo correto
     timerPrevisao.innerHTML = "A seguir: <strong>25 min de foco</strong>";
   }
 };

@@ -126,7 +126,6 @@ const atualizarEstatisticas = () => {
 
 // Temporizador assíncrono do navegador
 export const iniciarCronometro = (callback) => {
-  //Estado/Lógica
   // verifica se o cronômetro já foi iniciado
   if (cronometroId !== null) return;
   status = "executando";
@@ -134,15 +133,11 @@ export const iniciarCronometro = (callback) => {
     minutos = TEMPO_FOCO_MIN / 2;
   }
 
-  //Estado/Lógica
   cronometroId = setInterval(() => {
     // verifica se minutos e segundos são 0
     if (segundos === 0 && minutos === 0) {
-      //Efeito colateral
       emitirBeep();
-      //Estado/Lógica
       gerenciarFimDeCiclo();
-
       callback();
       return;
     }
@@ -161,13 +156,11 @@ export const pausarCronometro = () => {
   clearInterval(cronometroId);
   cronometroId = null;
   status = "pausado";
-  // manipulação visual → deve ir para o render
   timerPrevisao.textContent = "Em Pausa";
 };
 
 // Função de reset
 export const resetarCronometro = () => {
-  //estado/lógica
   clearInterval(cronometroId);
   minutos = TEMPO_FOCO_MIN;
   segundos = TEMPO_FOCO_SEG;
