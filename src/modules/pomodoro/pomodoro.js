@@ -1,5 +1,4 @@
 // Elementos HTML
-const elCiclosHoje = document.getElementById("contadorPainel");
 const elMinutosHoje = document.getElementById("tempoFocoPainel");
 const elMinutosOntem = document.getElementById("tempoFocoOntem");
 const elOfensiva = document.getElementById("ofensivaPainel");
@@ -29,6 +28,7 @@ export const getEstado = () => {
     segundos,
     modoAtual,
     ciclosConcluidos,
+    pomodoroCiclosHoje,
     status,
     tempoFocoMin:TEMPO_FOCO_MIN,
   };
@@ -89,7 +89,6 @@ const atualizarEstatisticas = () => {
     "pomodoro_ciclos_hoje",
     JSON.stringify(pomodoroCiclosHoje),
   );
-  elCiclosHoje.textContent = pomodoroCiclosHoje;
   // pega os minutos do localStorage soma
   const minutosAtuaisNoCofre =
     localStorage.getItem("pomodoro_minutos_hoje") === null
@@ -228,7 +227,6 @@ const inicializarAplicativo = () => {
     // Reset do card 1: Novo dia ou primeiro acesso!(Ciclos)
     pomodoroCiclosHoje = 0;
     localStorage.setItem("pomodoro_ciclos_hoje", JSON.stringify(0));
-    elCiclosHoje.textContent = 0;
 
     // Reset do card 2 (Minutos e foco)
     if (dataSalva === null) {
@@ -277,7 +275,6 @@ const inicializarAplicativo = () => {
       localStorage.getItem("pomodoro_ciclos_hoje") === null
         ? 0
         : parseInt(localStorage.getItem("pomodoro_ciclos_hoje"), 10);
-    elCiclosHoje.textContent = pomodoroCiclosHoje;
     // carrega os minutos do dia
     pomodoroMinutosHoje =
       localStorage.getItem("pomodoro_minutos_hoje") === null

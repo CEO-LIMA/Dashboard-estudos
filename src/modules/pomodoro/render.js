@@ -5,6 +5,7 @@ import {
   timerStatus,
   timerPrevisao,
   display,
+  elCiclosHoje
 } from "./DOM.js";
 
 export const atualizarDisplay = (estado) => {
@@ -60,9 +61,12 @@ export const atualizarControles = (estado) => {
     display.style.color = "#ffffff";
   }
 };
-
+export const renderizarEstatisticas = (estado) => {
+  elCiclosHoje.textContent = estado.pomodoroCiclosHoje;
+}
 export const renderizarPomodoro = (estado) => {
   atualizarDisplay(estado);
   atualizarStatusTexto(estado);
   atualizarControles(estado);
+  renderizarEstatisticas(estado);
 };

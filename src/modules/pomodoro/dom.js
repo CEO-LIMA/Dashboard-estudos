@@ -6,3 +6,4 @@ export const btnAumentar = document.getElementById("btnAumentar");
 export const btnDiminuir = document.getElementById("btnDiminuir");
 export const painelSetas = document.getElementById("painelSetas");
 export const timerPrevisao = document.getElementById("timerPrevisao");
+export const elCiclosHoje = document.getElementById("contadorPainel");
