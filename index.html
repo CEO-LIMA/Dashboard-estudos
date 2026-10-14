@@ -3,21 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meu Dashboard de Estudos</title>
-    <link rel="stylesheet" href="css/dashboard.css" />
-    <link rel="stylesheet" href="css/pomodoro.css" />
-    <link rel="stylesheet" href="css/todo.css" />
+    <title>StudyFlow</title>
+    <link rel="stylesheet" href="./src/styles/main.css" />
     <link rel="icon" href="data:," />
   </head>
   <body>
     <main class="dashboard-layout">
       <aside id="sidebar">
-        <h1 id="tituloDashboard">Dashboard de Estudos</h1>
+        <img src="./assets/./img/logo_StudyFlow.png" alt="StudyFlow" />
       </aside>
 
       <div class="main-content">
         <section id="secao-superior">
-          <section class="cronometro">
+          <section class="cronometro card">
             <h2 id="timerStatus">Pomodoro Pronto 🎯</h2>
 
             <div id="cronometro-container">
@@ -38,7 +36,7 @@
             <p id="timerPrevisao"></p>
           </section>
 
-          <section class="estatisticas">
+          <section class="estatisticas card">
             <div class="estatisticas-wrapper">
               <div class="card-estatistica-item">
                 <h3>Ciclos Concluídos</h3>
@@ -61,7 +59,7 @@
           </section>
         </section>
 
-        <section id="secao-todo">
+        <section id="secao-todo card">
           <div class="todo-container">
             <h2>Minhas Tarefas</h2>
 
@@ -96,7 +94,7 @@
       lucide.createIcons();
     </script>
 
-    <script src="js/pomodoro.js"></script>
-    <script src="js/todo.js"></script>
+    <script src="./src/modules/todo/todo.js"></script>
+    <script type="module" src="./src/index.js"></script>
   </body>
 </html>
