@@ -155,7 +155,6 @@ export const pausarCronometro = () => {
   clearInterval(cronometroId);
   cronometroId = null;
   status = "pausado";
-  timerPrevisao.textContent = "Em Pausa";
 };
 
 // Função de reset
@@ -296,8 +295,7 @@ const inicializarAplicativo = () => {
   }
 };
 
-// Evento de click da setas
-btnAumentar.addEventListener("click", () => {
+export const aumentarTempo = () => {
   if (TEMPO_FOCO_MIN < maximo) {
     if (TEMPO_FOCO_MIN >= 60) {
       TEMPO_FOCO_MIN += 10;
@@ -305,10 +303,10 @@ btnAumentar.addEventListener("click", () => {
       TEMPO_FOCO_MIN += 5;
     }
     minutos = TEMPO_FOCO_MIN;
-    atualizarDisplay();
-  }
-});
-btnDiminuir.addEventListener("click", () => {
+}
+};
+
+export const diminuirTempo= () => {
   if (cronometroId === null && TEMPO_FOCO_MIN > minimo) {
     if (TEMPO_FOCO_MIN > 60) {
       TEMPO_FOCO_MIN -= 10;
@@ -316,8 +314,7 @@ btnDiminuir.addEventListener("click", () => {
       TEMPO_FOCO_MIN -= 5;
     }
     minutos = TEMPO_FOCO_MIN;
-    atualizarDisplay();
-  }
-});
+}
+};
 // carrega o escript antes de renderizar o DOM
 document.addEventListener("DOMContentLoaded", inicializarAplicativo);

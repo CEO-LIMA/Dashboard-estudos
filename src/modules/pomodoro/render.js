@@ -19,6 +19,7 @@ export const atualizarDisplay = (estado) => {
 // Controla as mensagens no painel orientando o usuário
 export const atualizarStatusTexto = (estado) => {
   
+  
   if (estado.modoAtual === "foco") {
     if (estado.ciclosConcluidos === 0) {
       timerStatus.textContent = "Período de foco (1 de 2)";
@@ -39,6 +40,9 @@ export const atualizarStatusTexto = (estado) => {
     timerStatus.textContent = "Intervalo ☕";
     timerPrevisao.innerHTML = "A seguir: <strong>25 min de foco</strong>";
   }
+  if(estado.status === "pausado"){
+    timerPrevisao.innerHTML = "Em Pausa"
+  };
 };
 
 export const atualizarControles = (estado) => {
